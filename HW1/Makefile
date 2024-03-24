@@ -11,7 +11,7 @@ O = run
 C = *.cpp
 
 all:
-	g++ -I . -I  $(INC_DIR) -L . -L $(LIB_DIR) -o $(O) $(C) $(LIB) $(RPATH)
+	g++ -I . -I  $(INC_DIR) -L . -L $(LIB_DIR) -o $(O) $(C) $(LIB) $(RPATH) -O3
 	./run
 
 clean:

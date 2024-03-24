@@ -175,8 +175,11 @@ SC_MODULE(conv2d_0)
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",193600};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",23232};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",64};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",23232};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",64};
+	std::vector<double> weight;
+	
+	vector <double> bias;
 	
 
 	
@@ -194,25 +197,18 @@ SC_MODULE(conv2d_0)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt] = element;
+				bias.push_back(element);
 				cnt ++;
 			}
-
-			/*
-			for(int i =0;i<64;i++){
-				cout<<"weight_"<<i<<": "<<weight[i]<<endl;
-			}
-
-			for(int i =0;i<64;i++){
-				cout<<"bias_"<<i<<": "<<bias[i]<<endl;
-			}
-			*/
 			weight_file.close();
 			bias_file.close();
 
@@ -234,7 +230,8 @@ SC_MODULE(conv2d_0)
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			sc_fixed<40,17> partial_sum;
+			//sc_fixed<40,17> partial_sum;
+			double partial_sum;
 			for(int o_c=0;o_c<out_ch;o_c++){
 				for(int o_y=0;o_y<out_height;o_y++){
 					for(int o_x=0;o_x<out_width;o_x++){
@@ -248,7 +245,7 @@ SC_MODULE(conv2d_0)
 										in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
 										weight_idx = (o_c*in_ch*11*11)+(i_c*11*11)+((k_y+5)*(11))+(k_x+5);
 										//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
-										partial_sum+= (in_feature[in_feature_idx]*weight[weight_idx]);
+										partial_sum+= ((in_feature[in_feature_idx])*weight[weight_idx]);
 									}
 								}
 							}
@@ -258,7 +255,8 @@ SC_MODULE(conv2d_0)
 							out_feature[out_feature_idx] = 0;	
 						}
 						else{
-							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
+							partial_sum += bias[o_c];
+							out_feature[out_feature_idx] = (double)partial_sum;//bias[o_c] + partial_sum;
 						}
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
@@ -269,6 +267,8 @@ SC_MODULE(conv2d_0)
 				}
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 
@@ -385,9 +385,10 @@ SC_MODULE(conv2d_1)
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",139968};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",307200};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",192};
-	
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",307200};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",192};
+	vector<double> weight;
+	vector<double> bias;
 
 	
 	void run(){
@@ -403,13 +404,15 @@ SC_MODULE(conv2d_1)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				bias.push_back(element);
 				cnt ++;
 			}
 			/*
@@ -421,8 +424,8 @@ SC_MODULE(conv2d_1)
 				cout<<"bias_"<<i<<": "<<bias[i]<<endl;
 			}
 			*/
-			weight_file.close();
-			bias_file.close();
+			//weight_file.close();
+			//bias_file.close();
 
 			for(int i=0;i<out_ch*out_height*out_width;i++){
 				out_feature[i].write(0);
@@ -442,8 +445,8 @@ SC_MODULE(conv2d_1)
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			sc_fixed<40,17> partial_sum;
-
+			//sc_fixed<40,17> partial_sum;
+			double partial_sum;
 
 			for(int o_c=0;o_c<out_ch;o_c++){
 				for(int o_y=0;o_y<out_height;o_y++){
@@ -470,7 +473,9 @@ SC_MODULE(conv2d_1)
 							out_feature[out_feature_idx] = 0;	
 						}
 						else{
-							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
+							partial_sum+=bias[o_c];
+							//out_feature[out_feature_idx] = bias[o_c] + partial_sum;
+							out_feature[out_feature_idx] = (sc_fixed<40,17>)partial_sum;
 						}
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
@@ -481,6 +486,8 @@ SC_MODULE(conv2d_1)
 				}
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 			for(int i=0;i<out_ch*out_height*out_width;i++){
@@ -595,9 +602,10 @@ SC_MODULE(conv2d_2)
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",64896};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",663552};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",384};
-	
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",663552};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",384};
+	vector<double> weight;
+	vector<double> bias;
 
 	
 	void run(){
@@ -613,13 +621,15 @@ SC_MODULE(conv2d_2)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				bias.push_back(element);
 				cnt ++;
 			}
 			/*
@@ -654,8 +664,8 @@ SC_MODULE(conv2d_2)
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			sc_fixed<40,17> partial_sum;
-
+			//sc_fixed<40,17> partial_sum;
+			double partial_sum;
 
 			for(int o_c=0;o_c<out_ch;o_c++){
 				for(int o_y=0;o_y<out_height;o_y++){
@@ -682,7 +692,8 @@ SC_MODULE(conv2d_2)
 							out_feature[out_feature_idx] = 0;	
 						}
 						else{
-							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
+							partial_sum+=bias[o_c];
+							out_feature[out_feature_idx] = (sc_fixed<40,17>)partial_sum;//bias[o_c] + partial_sum;
 						}
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
@@ -693,6 +704,8 @@ SC_MODULE(conv2d_2)
 				}
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 			out_valid.write(0);
@@ -740,9 +753,10 @@ SC_MODULE(conv2d_3)
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",43264};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",884736};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",256};
-	
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",884736};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",256};
+	vector<double> weight;
+	vector<double> bias;
 
 	
 	void run(){
@@ -758,13 +772,15 @@ SC_MODULE(conv2d_3)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				bias.push_back(element);
 				cnt ++;
 			}
 
@@ -790,8 +806,8 @@ SC_MODULE(conv2d_3)
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			sc_fixed<40,17> partial_sum;
-
+			//sc_fixed<40,17> partial_sum;
+			double partial_sum;
 
 			for(int o_c=0;o_c<out_ch;o_c++){
 				for(int o_y=0;o_y<out_height;o_y++){
@@ -818,7 +834,8 @@ SC_MODULE(conv2d_3)
 							out_feature[out_feature_idx] = 0;	
 						}
 						else{
-							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
+							partial_sum+=bias[o_c];
+							out_feature[out_feature_idx] = (sc_fixed<40,17>)partial_sum;//bias[o_c] + partial_sum;
 						}
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
@@ -829,6 +846,8 @@ SC_MODULE(conv2d_3)
 				}
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 			out_valid.write(0);
@@ -878,9 +897,10 @@ SC_MODULE(conv2d_4)
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",43264};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",589824};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",256};
-	
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",589824};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",256};
+	vector<double> weight;
+	vector<double> bias;
 
 	
 	void run(){
@@ -896,24 +916,17 @@ SC_MODULE(conv2d_4)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				bias.push_back(element);
 				cnt ++;
 			}
-			/*
-			for(int i =0;i<64;i++){
-				cout<<"weight_"<<i<<": "<<weight[i]<<endl;
-			}
-
-			for(int i =0;i<64;i++){
-				cout<<"bias_"<<i<<": "<<bias[i]<<endl;
-			}
-			*/
 			weight_file.close();
 			bias_file.close();
 
@@ -935,8 +948,8 @@ SC_MODULE(conv2d_4)
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			sc_fixed<40,17> partial_sum;
-
+			//sc_fixed<40,17> partial_sum;
+			double partial_sum;
 
 			for(int o_c=0;o_c<out_ch;o_c++){
 				for(int o_y=0;o_y<out_height;o_y++){
@@ -963,7 +976,8 @@ SC_MODULE(conv2d_4)
 							out_feature[out_feature_idx] = 0;	
 						}
 						else{
-							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
+							partial_sum+=bias[o_c];
+							out_feature[out_feature_idx] = (sc_fixed<40,17>)partial_sum;//[o_c] + partial_sum;
 						}
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
@@ -974,6 +988,8 @@ SC_MODULE(conv2d_4)
 				}
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 			out_valid.write(0);
@@ -1079,8 +1095,10 @@ SC_MODULE(LINEAR0_RELU)
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",9216};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",4096};
 
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",37748736};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",4096};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",37748736};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",4096};
+	vector<double> weight;
+	vector<double> bias;
 
 	void run(){
 		if ( rst.read() == 1 ){
@@ -1095,13 +1113,15 @@ SC_MODULE(LINEAR0_RELU)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				bias.push_back(element);
 				cnt ++;
 			}
 			weight_file.close();
@@ -1124,8 +1144,8 @@ SC_MODULE(LINEAR0_RELU)
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			sc_fixed<40,17> partial_sum;
-
+			//sc_fixed<40,17> partial_sum;
+			double partial_sum;
 			for(int o_c=0;o_c<out_ch;o_c++){
 				partial_sum = 0;
 				for(int i_c=0;i_c<in_ch;i_c++){
@@ -1135,7 +1155,8 @@ SC_MODULE(LINEAR0_RELU)
 					out_feature[o_c] = 0;
 				}
 				else {
-					out_feature[o_c] = partial_sum + bias[o_c];
+					partial_sum+=bias[o_c];
+					out_feature[o_c] = (sc_fixed<40,17>)partial_sum;//partial_sum + bias[o_c];
 				}
 				/*
 				if(o_c==0){
@@ -1144,6 +1165,8 @@ SC_MODULE(LINEAR0_RELU)
 				*/
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 			for(int i=0;i<out_ch;i++){
@@ -1185,8 +1208,11 @@ SC_MODULE(LINEAR1_RELU)
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",4096};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",4096};
 
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",16777216};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",4096};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",16777216};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",4096};
+	vector<double> weight;
+	vector<double> bias;
+
 
 	void run(){
 		if ( rst.read() == 1 ){
@@ -1201,13 +1227,15 @@ SC_MODULE(LINEAR1_RELU)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				bias.push_back(element);
 				cnt ++;
 			}
 			weight_file.close();
@@ -1241,7 +1269,8 @@ SC_MODULE(LINEAR1_RELU)
 					out_feature[o_c] = 0;
 				}
 				else {
-					out_feature[o_c] = partial_sum + bias[o_c];
+					partial_sum+=bias[o_c];
+					out_feature[o_c] = (sc_fixed<40,17>)partial_sum;//partial_sum + bias[o_c];
 				}
 				/*
 				if(o_c==0){
@@ -1250,6 +1279,8 @@ SC_MODULE(LINEAR1_RELU)
 				*/
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 			for(int i=0;i<out_ch;i++){
@@ -1290,8 +1321,10 @@ SC_MODULE(LINEAR2)
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",4096};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",1000};
 
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",4096000};
-	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",1000};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",4096000};
+	//sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",1000};
+	vector<double> weight;
+	vector<double> bias;
 
 	void run(){
 		if ( rst.read() == 1 ){
@@ -1306,13 +1339,15 @@ SC_MODULE(LINEAR2)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				weight[cnt].write((sc_fixed<40,17>) (element));
+				//weight[cnt].write((sc_fixed<40,17>) (element));
+				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				bias[cnt].write((sc_fixed<40,17>) (element));
+				//bias[cnt].write((sc_fixed<40,17>) (element));
+				bias.push_back(element);
 				cnt ++;
 			}
 			weight_file.close();
@@ -1336,14 +1371,16 @@ SC_MODULE(LINEAR2)
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			sc_fixed<40,17> partial_sum;
-
+			//sc_fixed<40,17> partial_sum;
+			double partial_sum;
 			for(int o_c=0;o_c<out_ch;o_c++){
 				partial_sum = 0;
 				for(int i_c=0;i_c<in_ch;i_c++){
 					partial_sum+=(in_feature[i_c]*weight[(o_c*in_ch)+i_c]);
 				}
-				out_feature[o_c] = partial_sum + bias[o_c];
+				partial_sum+=bias[o_c];
+				out_feature[o_c] = (sc_fixed<40,17>)partial_sum;//partial_sum + bias[o_c];
+				//out_feature[o_c] = partial_sum + bias[o_c];
 				/*
 				if(o_c==0){
 					cout<<"linear2["<<o_c<<"]: "<< out_feature[o_c] <<endl;
@@ -1351,6 +1388,8 @@ SC_MODULE(LINEAR2)
 				*/
 			}
 			out_valid.write(1);
+			//weight.clear();
+			//bias.clear();
 		}
 		else{
 			for(int i=0;i<out_ch;i++){

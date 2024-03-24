@@ -131,8 +131,9 @@ int sc_main( int argc, char* argv[] ) {
 	m_Monitor.linear1_out_last(linear1_out[4095]);
 	
 	m_Monitor.out_valid_linear2(out_valid_linear2);
-	m_Monitor.linear2_out_first(linear2_out[0]);
-	m_Monitor.linear2_out_last(linear2_out[999]);
+	m_Monitor.linear2_out(linear2_out);
+	//m_Monitor.linear2_out_first(linear2_out[0]);
+	//m_Monitor.linear2_out_last(linear2_out[999]);
 
 
 	//m_Pattern( rst, clk, A, B, C );

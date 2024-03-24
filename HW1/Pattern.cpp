@@ -40,6 +40,24 @@ void Pattern::run() {
 		}
 		in_valid.write(1);
 	}
+	else if(cycle==2){
+		//sc_vector<sc_out<sc_fixed<40,17>>> img{"img",IMG_CHANNEL*IMG_WEIGHT*IMG_HEIGHT}
+		std::ifstream inputFile("../data/cat.txt");
+		double img_element;
+		int cnt = 0;
+		std::vector <double> numbers;
+		while (inputFile >> img_element) {
+			//numbers.push_back(par);
+			//std::cout<< img_element<<std::endl;
+			img[cnt] = (sc_fixed<40,17>) (img_element);
+			cnt ++;
+			//std::cout<<cnt<<std::endl;
+		}
+		in_valid.write(1);
+
+	}
+
+
 	else{
 		in_valid.write(0);
 	}

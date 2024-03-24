@@ -1,7 +1,10 @@
 #define SC_INCLUDE_FX
 #include <systemc.h>
 #include <iostream>
-
+#include <fstream>
+#include <vector>
+#include <string>
+#include <sstream>
 using namespace std;
 
 SC_MODULE( Monitor ) {	
@@ -63,9 +66,9 @@ SC_MODULE( Monitor ) {
 	sc_in<sc_fixed<40,17>> linear1_out_first;
 	sc_in<sc_fixed<40,17>> linear1_out_last;
 	sc_in <bool> out_valid_linear2;
-	//sc_vector<sc_in<sc_fixed<40,17>>> linear2_out{"linear2_out",1000};
-	sc_in<sc_fixed<40,17>> linear2_out_first;
-	sc_in<sc_fixed<40,17>> linear2_out_last;
+	sc_vector<sc_in<sc_fixed<40,17>>> linear2_out{"linear2_out",1000};
+	//sc_in<sc_fixed<40,17>> linear2_out_first;
+	//sc_in<sc_fixed<40,17>> linear2_out_last;
 	
 	/*
 	sc_in < sc_fixed<40,17> > A, B;
@@ -74,6 +77,7 @@ SC_MODULE( Monitor ) {
 	*/
 
 	int cycle;
+	vector <string> class_dict;
 	
 	void run();
 	
