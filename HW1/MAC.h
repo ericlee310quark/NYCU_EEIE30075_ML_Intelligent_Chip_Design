@@ -168,6 +168,8 @@ SC_MODULE(conv2d_0)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",150528};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",193600};
@@ -181,7 +183,10 @@ SC_MODULE(conv2d_0)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Conv0 load weight and bias                                  *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			
 			std::ifstream weight_file("../data/conv1_weight.txt");
 			std::ifstream bias_file("../data/conv1_bias.txt");
 
@@ -199,6 +204,7 @@ SC_MODULE(conv2d_0)
 				cnt ++;
 			}
 
+			/*
 			for(int i =0;i<64;i++){
 				cout<<"weight_"<<i<<": "<<weight[i]<<endl;
 			}
@@ -206,17 +212,21 @@ SC_MODULE(conv2d_0)
 			for(int i =0;i<64;i++){
 				cout<<"bias_"<<i<<": "<<bias[i]<<endl;
 			}
+			*/
 			weight_file.close();
 			bias_file.close();
 
 			for(int i=0;i<out_ch*out_height*out_width;i++){
 				out_feature[i].write(0);
 			}
-
+			out_valid.write(0);
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Conv0 Parameters                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 
 			return;
 		}
-		//else{
+		if(in_valid.read()==1){
 			//TODO sc_out
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
@@ -225,23 +235,6 @@ SC_MODULE(conv2d_0)
 			int in_feature_idx = 0;
 			int weight_idx = 0;
 			sc_fixed<40,17> partial_sum;
-
-
-/*
-for out_channel in range(64):
-  for out_row in range(55):
-    for out_col in range(55):
-      for in_channel in range(3):
-        for ker_row in range(11):
-          for ker_col in range(11):
-            conv1_output[out_channel, out_row, out_col] += \
-              conv1_input[in_channel, out_row*4+ker_row, out_col*4+ker_col] * \
-              conv1_weight[out_channel, in_channel, ker_row, ker_col]
-      conv1_output[out_channel, out_row, out_col] += conv1_bias[out_channel]
-conv1_output = np.maximum(conv1_output, 0)
-*/
-//
-
 			for(int o_c=0;o_c<out_ch;o_c++){
 				for(int o_y=0;o_y<out_height;o_y++){
 					for(int o_x=0;o_x<out_width;o_x++){
@@ -249,25 +242,14 @@ conv1_output = np.maximum(conv1_output, 0)
 						for(int i_c=0;i_c<in_ch;i_c++){
 							for(int k_y=-5;k_y<6;k_y++){
 								for(int k_x=-5;k_x<6;k_x++){
-
-									//cout<<"flag0"<<endl;
 									in_feature_y = stride*o_y+k_y+5-2;
 									in_feature_x = stride*o_x+k_x+5-2;
-									/*
-									if((in_feature_y<0)||(in_feature_x<0)||(in_feature_y>=in_height)||(in_feature_x>=in_width)){
-										continue;
-									}
-									*/
 									if(!((in_feature_y<0)||(in_feature_x<0)||(in_feature_y>=in_height)||(in_feature_x>=in_width))){
 										in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
 										weight_idx = (o_c*in_ch*11*11)+(i_c*11*11)+((k_y+5)*(11))+(k_x+5);
 										//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
 										partial_sum+= (in_feature[in_feature_idx]*weight[weight_idx]);
 									}
-									//cout<<"in_feature_idx: "<<in_feature_idx<<endl;
-									//cout<<"weight_idx: "<<weight_idx<<"|"<<o_c<<"|"<<i_c<<"| "<<k_y<<"|"<<k_x<<endl;
-
-									//cout<<"flag1"<<endl;
 								}
 							}
 						}
@@ -278,16 +260,23 @@ conv1_output = np.maximum(conv1_output, 0)
 						else{
 							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
 						}
+						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
 							cout<<"conv0_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
 						}
-
+						*/
 					}
 				}
-
-
 			}
-		//}
+			out_valid.write(1);
+		}
+		else{
+
+			for(int i=0;i<out_ch*out_height*out_width;i++){
+				out_feature[i].write(out_feature[i]);
+			}
+			out_valid.write(0);
+		}
 	}
 	
 	
@@ -312,43 +301,48 @@ conv1_output = np.maximum(conv1_output, 0)
 SC_MODULE(MAX_POOLING_0)
 {
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",193600};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",46656};
 	
 	void run(){
-		const int OUT_CHANNEL =64;
-		const int OUT_SIZE = 27;
+		if(in_valid.read()==1){
+			const int OUT_CHANNEL =64;
+			const int OUT_SIZE = 27;
 
-		const int IN_CHANNEL = 64;
-		const int IN_SIZE = 55;
-		const int STRIDE = 2;
-		int in_feature_x = 0;
-		int in_feature_y = 0;
-		
-		sc_fixed<40,17> temp_large;
-		for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
-			for(int o_y=0;o_y<OUT_SIZE;o_y++){
-				for(int o_x=0;o_x<OUT_SIZE;o_x++){
-					temp_large = 0;
-					for(int k_y=-1;k_y<=1;k_y++){
-						for(int k_x=-1;k_x<=1;k_x++){
-							in_feature_y = o_y * STRIDE + 1 + k_y;
-							in_feature_x = o_x * STRIDE + 1 + k_x;
-							if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
-								temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+			const int IN_CHANNEL = 64;
+			const int IN_SIZE = 55;
+			const int STRIDE = 2;
+			int in_feature_x = 0;
+			int in_feature_y = 0;
+			sc_fixed<40,17> temp_large;
+			for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
+				for(int o_y=0;o_y<OUT_SIZE;o_y++){
+					for(int o_x=0;o_x<OUT_SIZE;o_x++){
+						temp_large = 0;
+						for(int k_y=-1;k_y<=1;k_y++){
+							for(int k_x=-1;k_x<=1;k_x++){
+								in_feature_y = o_y * STRIDE + 1 + k_y;
+								in_feature_x = o_x * STRIDE + 1 + k_x;
+								if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
+									temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+								}
 							}
 						}
+						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
+						/*
+						if((o_c==0)&&(o_y==0)&&(o_x==0)){
+							cout<<"maxpooling_0_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
+						}
+						*/
 					}
-					out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
-				
-					if((o_c==0)&&(o_y==0)&&(o_x==0)){
-						cout<<"maxpooling_0_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
-					}
-				
-				
 				}
 			}
-
+			out_valid.write(1);
+		}
+		else{
+			out_valid.write(0);
 		}
 	}
 	SC_CTOR(MAX_POOLING_0)
@@ -384,6 +378,8 @@ SC_MODULE(conv2d_1)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",46656};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",139968};
@@ -397,7 +393,9 @@ SC_MODULE(conv2d_1)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Conv1 load weight and bias                                  *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 			std::ifstream weight_file("../data/conv2_weight.txt");
 			std::ifstream bias_file("../data/conv2_bias.txt");
 
@@ -429,12 +427,15 @@ SC_MODULE(conv2d_1)
 			for(int i=0;i<out_ch*out_height*out_width;i++){
 				out_feature[i].write(0);
 			}
-
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Conv1 Parameters                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			out_valid.write(0);
 			return;
 		}
 		//else{
-			//TODO sc_out
+		if(in_valid.read()==1){
+//TODO sc_out
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -471,12 +472,22 @@ SC_MODULE(conv2d_1)
 						else{
 							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
 						}
+						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
 							cout<<"conv1_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
 						}
+						*/
 					}
 				}
 			}
+			out_valid.write(1);
+		}
+		else{
+			for(int i=0;i<out_ch*out_height*out_width;i++){
+				out_feature[i].write(out_feature[i]);
+			}
+			out_valid.write(0);
+		}		
 	}
 	
 	SC_CTOR(conv2d_1)
@@ -498,6 +509,8 @@ SC_MODULE(conv2d_1)
 SC_MODULE(MAX_POOLING_1)
 {
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",139968};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",32448};
 	
@@ -510,31 +523,36 @@ SC_MODULE(MAX_POOLING_1)
 		const int STRIDE = 2;
 		int in_feature_x = 0;
 		int in_feature_y = 0;
-		
-		sc_fixed<40,17> temp_large;
-		for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
-			for(int o_y=0;o_y<OUT_SIZE;o_y++){
-				for(int o_x=0;o_x<OUT_SIZE;o_x++){
-					temp_large = 0;
-					for(int k_y=-1;k_y<=1;k_y++){
-						for(int k_x=-1;k_x<=1;k_x++){
-							in_feature_y = o_y * STRIDE + 1 + k_y;
-							in_feature_x = o_x * STRIDE + 1 + k_x;
-							if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
-								temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+		if(in_valid.read()==1){
+
+			sc_fixed<40,17> temp_large;
+			for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
+				for(int o_y=0;o_y<OUT_SIZE;o_y++){
+					for(int o_x=0;o_x<OUT_SIZE;o_x++){
+						temp_large = 0;
+						for(int k_y=-1;k_y<=1;k_y++){
+							for(int k_x=-1;k_x<=1;k_x++){
+								in_feature_y = o_y * STRIDE + 1 + k_y;
+								in_feature_x = o_x * STRIDE + 1 + k_x;
+								if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
+									temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+								}
 							}
 						}
+						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
+						/*
+						if((o_c==0)&&(o_y==0)&&(o_x==0)){
+							cout<<"maxpooling_1_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
+						}
+						*/
 					}
-					out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
-				
-					if((o_c==0)&&(o_y==0)&&(o_x==0)){
-						cout<<"maxpooling_1_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
-					}
-				
-				
 				}
-			}
 
+			}
+			out_valid.write(1);
+		}
+		else{
+			out_valid.write(0);
 		}
 	}
 	SC_CTOR(MAX_POOLING_1)
@@ -570,12 +588,14 @@ SC_MODULE(conv2d_2)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",32448};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",64896};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",12460032};
+	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",663552};
 	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",384};
 	
 
@@ -583,7 +603,9 @@ SC_MODULE(conv2d_2)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Conv1 load weight and bias                                  *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 			std::ifstream weight_file("../data/conv3_weight.txt");
 			std::ifstream bias_file("../data/conv3_bias.txt");
 
@@ -615,11 +637,16 @@ SC_MODULE(conv2d_2)
 			for(int i=0;i<out_ch*out_height*out_width;i++){
 				out_feature[i].write(0);
 			}
-
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Conv2 Parameters                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			out_valid.write(0);
 			return;
 		}
 		//else{
+		if(in_valid.read()==1){
+
+
 			//TODO sc_out
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
@@ -657,12 +684,19 @@ SC_MODULE(conv2d_2)
 						else{
 							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
 						}
+						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
 							cout<<"conv2_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
 						}
+						*/
 					}
 				}
 			}
+			out_valid.write(1);
+		}
+		else{
+			out_valid.write(0);
+		}
 	}
 	
 	SC_CTOR(conv2d_2)
@@ -689,7 +723,6 @@ SC_MODULE(conv2d_3)
 	const int in_height = 13;
 	const int in_width = 13;
 
-
 	const int out_ch = 256;
 	const int out_height = 13;
 	const int out_width = 13;
@@ -700,12 +733,14 @@ SC_MODULE(conv2d_3)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",64896};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",43264};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",16613376};
+	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",884736};
 	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",256};
 	
 
@@ -713,7 +748,9 @@ SC_MODULE(conv2d_3)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Conv3 load weight and bias                                  *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 			std::ifstream weight_file("../data/conv4_weight.txt");
 			std::ifstream bias_file("../data/conv4_bias.txt");
 
@@ -730,27 +767,23 @@ SC_MODULE(conv2d_3)
 				bias[cnt].write((sc_fixed<40,17>) (element));
 				cnt ++;
 			}
-			/*
-			for(int i =0;i<64;i++){
-				cout<<"weight_"<<i<<": "<<weight[i]<<endl;
-			}
 
-			for(int i =0;i<64;i++){
-				cout<<"bias_"<<i<<": "<<bias[i]<<endl;
-			}
-			*/
 			weight_file.close();
 			bias_file.close();
 
 			for(int i=0;i<out_ch*out_height*out_width;i++){
 				out_feature[i].write(0);
 			}
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Conv3 Parameters                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			out_valid.write(0);
 
 			return;
 		}
 		//else{
 			//TODO sc_out
+		if(in_valid.read()){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -787,12 +820,19 @@ SC_MODULE(conv2d_3)
 						else{
 							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
 						}
+						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
 							cout<<"conv3_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
 						}
+						*/
 					}
 				}
 			}
+			out_valid.write(1);
+		}
+		else{
+			out_valid.write(0);
+		}
 	}
 	
 	SC_CTOR(conv2d_3)
@@ -831,12 +871,14 @@ SC_MODULE(conv2d_4)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",43264};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",43264};
 
 	//sc_vector<sc_signal<sc_fixed<40,17>>> after_padding{"after_padding",154587};
-	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",11075584};
+	sc_vector<sc_signal<sc_fixed<40,17>>> weight{"weight",589824};
 	sc_vector<sc_signal<sc_fixed<40,17>>> bias{"bias",256};
 	
 
@@ -844,7 +886,9 @@ SC_MODULE(conv2d_4)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Conv4 load weight and bias                                  *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 			std::ifstream weight_file("../data/conv5_weight.txt");
 			std::ifstream bias_file("../data/conv5_bias.txt");
 
@@ -876,12 +920,15 @@ SC_MODULE(conv2d_4)
 			for(int i=0;i<out_ch*out_height*out_width;i++){
 				out_feature[i].write(0);
 			}
-
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Conv4 Parameters                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			out_valid.write(0);
 			return;
 		}
 		//else{
 			//TODO sc_out
+		if(in_valid.read()){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -918,12 +965,19 @@ SC_MODULE(conv2d_4)
 						else{
 							out_feature[out_feature_idx] = bias[o_c] + partial_sum;
 						}
+						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
 							cout<<"conv4_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
 						}
+						*/
 					}
 				}
 			}
+			out_valid.write(1);
+		}
+		else{
+			out_valid.write(0);
+		}
 	}
 	
 	SC_CTOR(conv2d_4)
@@ -947,43 +1001,49 @@ SC_MODULE(conv2d_4)
 SC_MODULE(MAX_POOLING_2)
 {
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",43264};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",9216};
 	
 	void run(){
-		const int OUT_CHANNEL =256;
-		const int OUT_SIZE = 6;
+		if(in_valid.read()==1){
+			const int OUT_CHANNEL =256;
+			const int OUT_SIZE = 6;
 
-		const int IN_CHANNEL = 256;
-		const int IN_SIZE = 13;
-		const int STRIDE = 2;
-		int in_feature_x = 0;
-		int in_feature_y = 0;
-		
-		sc_fixed<40,17> temp_large;
-		for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
-			for(int o_y=0;o_y<OUT_SIZE;o_y++){
-				for(int o_x=0;o_x<OUT_SIZE;o_x++){
-					temp_large = 0;
-					for(int k_y=-1;k_y<=1;k_y++){
-						for(int k_x=-1;k_x<=1;k_x++){
-							in_feature_y = o_y * STRIDE + 1 + k_y;
-							in_feature_x = o_x * STRIDE + 1 + k_x;
-							if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
-								temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+			const int IN_CHANNEL = 256;
+			const int IN_SIZE = 13;
+			const int STRIDE = 2;
+			int in_feature_x = 0;
+			int in_feature_y = 0;
+			
+			sc_fixed<40,17> temp_large;
+			for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
+				for(int o_y=0;o_y<OUT_SIZE;o_y++){
+					for(int o_x=0;o_x<OUT_SIZE;o_x++){
+						temp_large = 0;
+						for(int k_y=-1;k_y<=1;k_y++){
+							for(int k_x=-1;k_x<=1;k_x++){
+								in_feature_y = o_y * STRIDE + 1 + k_y;
+								in_feature_x = o_x * STRIDE + 1 + k_x;
+								if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
+									temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+								}
 							}
 						}
+						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
+						/*
+						if((o_c==0)&&(o_y==0)&&(o_x==0)){
+							cout<<"maxpooling_2_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
+						}
+						*/
 					}
-					out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
-				
-					if((o_c==0)&&(o_y==0)&&(o_x==0)){
-						cout<<"maxpooling_2_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
-					}
-				
-				
 				}
 			}
-
+			out_valid.write(1);
+		}
+		else{
+			out_valid.write(0);
 		}
 	}
 	SC_CTOR(MAX_POOLING_2)
@@ -1013,6 +1073,8 @@ SC_MODULE(LINEAR0_RELU)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",9216};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",4096};
@@ -1023,7 +1085,9 @@ SC_MODULE(LINEAR0_RELU)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Linear0 load weight and bias                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 			std::ifstream weight_file("../data/fc6_weight.txt");
 			std::ifstream bias_file("../data/fc6_bias.txt");
 
@@ -1046,12 +1110,14 @@ SC_MODULE(LINEAR0_RELU)
 			for(int i=0;i<out_ch;i++){
 				out_feature[i].write(0);
 			}
-
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Linear0 Parameters                              *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			out_valid.write(0);
 			return;
 		}
 		//else{
-
+		if(in_valid.read()==1){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -1071,10 +1137,20 @@ SC_MODULE(LINEAR0_RELU)
 				else {
 					out_feature[o_c] = partial_sum + bias[o_c];
 				}
+				/*
 				if(o_c==0){
 					cout<<"linear0_relu["<<o_c<<"]: "<< out_feature[o_c] <<endl;
 				}
+				*/
 			}
+			out_valid.write(1);
+		}
+		else{
+			for(int i=0;i<out_ch;i++){
+				out_feature[i].write(0);
+			}
+			out_valid.write(0);
+		}
 	}
 	
 	SC_CTOR(LINEAR0_RELU)
@@ -1103,6 +1179,8 @@ SC_MODULE(LINEAR1_RELU)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",4096};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",4096};
@@ -1113,7 +1191,9 @@ SC_MODULE(LINEAR1_RELU)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Linear1 load weight and bias                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 			std::ifstream weight_file("../data/fc7_weight.txt");
 			std::ifstream bias_file("../data/fc7_bias.txt");
 
@@ -1136,12 +1216,14 @@ SC_MODULE(LINEAR1_RELU)
 			for(int i=0;i<out_ch;i++){
 				out_feature[i].write(0);
 			}
-
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Linear1 Parameters                              *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			out_valid.write(0);
 			return;
 		}
 		//else{
-
+		if(in_valid.read()==1){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -1161,10 +1243,20 @@ SC_MODULE(LINEAR1_RELU)
 				else {
 					out_feature[o_c] = partial_sum + bias[o_c];
 				}
+				/*
 				if(o_c==0){
 					cout<<"linear1_relu["<<o_c<<"]: "<< out_feature[o_c] <<endl;
 				}
+				*/
 			}
+			out_valid.write(1);
+		}
+		else{
+			for(int i=0;i<out_ch;i++){
+				out_feature[i].write(0);
+			}
+			out_valid.write(0);
+		}
 	}
 	
 	SC_CTOR(LINEAR1_RELU)
@@ -1192,6 +1284,8 @@ SC_MODULE(LINEAR2)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
+	sc_in <bool> in_valid;
+	sc_out <bool> out_valid;
 
 	sc_vector<sc_in<sc_fixed<40,17>>> in_feature{"in_feature",4096};
 	sc_vector<sc_out<sc_fixed<40,17>>> out_feature{"out_feature",1000};
@@ -1202,7 +1296,9 @@ SC_MODULE(LINEAR2)
 	void run(){
 		if ( rst.read() == 1 ){
 			//TODO update weights, bias
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Linear2 load weight and bias                                *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
 			std::ifstream weight_file("../data/fc8_weight.txt");
 			std::ifstream bias_file("../data/fc8_bias.txt");
 
@@ -1225,12 +1321,15 @@ SC_MODULE(LINEAR2)
 			for(int i=0;i<out_ch;i++){
 				out_feature[i].write(0);
 			}
-
+			cout<<"**********************************************************************************************"<<endl;
+			cout<<"*                                Finish Load Linear2 Parameters                              *"<<endl;
+			cout<<"**********************************************************************************************"<<endl;
+			out_valid.write(0);
 
 			return;
 		}
 		//else{
-
+		if(in_valid==1){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -1245,10 +1344,20 @@ SC_MODULE(LINEAR2)
 					partial_sum+=(in_feature[i_c]*weight[(o_c*in_ch)+i_c]);
 				}
 				out_feature[o_c] = partial_sum + bias[o_c];
+				/*
 				if(o_c==0){
 					cout<<"linear2["<<o_c<<"]: "<< out_feature[o_c] <<endl;
 				}
+				*/
 			}
+			out_valid.write(1);
+		}
+		else{
+			for(int i=0;i<out_ch;i++){
+				out_feature[i].write(0);
+			}
+			out_valid.write(0);
+		}
 	}
 	
 	SC_CTOR(LINEAR2)
