@@ -1173,7 +1173,7 @@ SC_MODULE(LINEAR0_RELU)
 		}
 		else{
 			for(int i=0;i<out_ch;i++){
-				//out_feature[i].write(0);
+				out_feature[i].write(0);
 			}
 			out_valid.write(0);
 		}
@@ -1287,7 +1287,7 @@ SC_MODULE(LINEAR1_RELU)
 		}
 		else{
 			for(int i=0;i<out_ch;i++){
-				//out_feature[i].write(0);
+				out_feature[i].write(0);
 			}
 			out_valid.write(0);
 		}
@@ -1396,7 +1396,7 @@ SC_MODULE(LINEAR2)
 		}
 		else{
 			for(int i=0;i<out_ch;i++){
-				//out_feature[i].write(0);
+				out_feature[i].write(0);
 			}
 			out_valid.write(0);
 		}

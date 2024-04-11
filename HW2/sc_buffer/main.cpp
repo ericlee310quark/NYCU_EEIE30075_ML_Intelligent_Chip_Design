@@ -8,46 +8,46 @@
 using namespace std;
 
 int sc_main( int argc, char* argv[] ) {
-	sc_signal < bool > clk, rst;
+	sc_buffer < bool > clk, rst;
 	/*
-	sc_signal < sc_fixed_fast<46,17> > A, B;
-	sc_signal < sc_fixed_fast<46,17> > C;
-	sc_signal < sc_fixed_fast<46,17> > Y;
+	sc_buffer < sc_fixed_fast<46,17> > A, B;
+	sc_buffer < sc_fixed_fast<46,17> > C;
+	sc_buffer < sc_fixed_fast<46,17> > Y;
 	*/
-	sc_signal <bool> in_valid_pat;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> img_out{"img_out", 150528};
+	sc_buffer <bool> in_valid_pat;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> img_out{"img_out", 150528};
 
 
-	sc_signal <bool> out_valid_conv0;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> conv0_out{"conv0_out",193600};
+	sc_buffer <bool> out_valid_conv0;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv0_out{"conv0_out",193600};
 	
-	sc_signal <bool> out_valid_max0;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> max0_out{"max0_out",46656};
+	sc_buffer <bool> out_valid_max0;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max0_out{"max0_out",46656};
 	
-	sc_signal <bool> out_valid_conv1;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> conv1_out{"conv1_out",139968};
+	sc_buffer <bool> out_valid_conv1;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv1_out{"conv1_out",139968};
 
-	sc_signal <bool> out_valid_max1;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> max1_out{"max1_out",32448};
+	sc_buffer <bool> out_valid_max1;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max1_out{"max1_out",32448};
 	
-	sc_signal <bool> out_valid_conv2;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> conv2_out{"conv2_out",64896};
-	sc_signal <bool> out_valid_conv3;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> conv3_out{"conv3_out",43264};
-	sc_signal <bool> out_valid_conv4;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> conv4_out{"conv4_out",43264};
+	sc_buffer <bool> out_valid_conv2;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv2_out{"conv2_out",64896};
+	sc_buffer <bool> out_valid_conv3;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv3_out{"conv3_out",43264};
+	sc_buffer <bool> out_valid_conv4;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv4_out{"conv4_out",43264};
 
-	sc_signal <bool> out_valid_max2;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> max2_out{"max2_out",9216};
+	sc_buffer <bool> out_valid_max2;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max2_out{"max2_out",9216};
 	
-	sc_signal <bool> out_valid_linear0;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> linear0_out{"linear0_out",4096};
-	sc_signal <bool> out_valid_linear1;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> linear1_out{"linear1_out",4096};
-	sc_signal <bool> out_valid_linear2;
-	sc_vector<sc_signal<sc_fixed_fast<46,17>>> linear2_out{"linear2_out",1000};
+	sc_buffer <bool> out_valid_linear0;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear0_out{"linear0_out",4096};
+	sc_buffer <bool> out_valid_linear1;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear1_out{"linear1_out",4096};
+	sc_buffer <bool> out_valid_linear2;
+	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear2_out{"linear2_out",1000};
 	
-	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> softmax_out{"softmax_out",1000};
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> softmax_out{"softmax_out",1000};
 
 	Reset m_Reset( "m_Reset", 10 );
 	Clock m_clock( "m_clock", 5, 100 );

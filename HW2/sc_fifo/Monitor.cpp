@@ -41,8 +41,8 @@ void Monitor:: run() {
 		cout<<"\033[32;5m=			              RST signal ON                                  =\033[0m"<<endl;
 		cout<<"----------------------------------------------------------------------------------------------"<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"in_valid_pat: \t\t"		<< in_valid_pat		 << 
-				"\t||\timg_out[0]: \t\t"	<< double(img_out_first.read()) 		<< "\t\t\t||\timg_out[150527]: \t\t"	<<double(img_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"in_valid_pat: \t\t"		<< in_valid_pat->read()		 << 
+		//		"\t||\timg_out[0]: \t\t"	<< double(img_out_first->read()) 		<< "\t\t\t||\timg_out[150527]: \t\t"	<<double(img_out_last->read())<<endl;
 		
 		cout<<fixed<<setprecision(8)<<"out_valid_conv0: \t"	<< out_valid_conv0	 << 
 				"\t||\tconv0_out[0]: \t\t"	<< double(conv0_out_first.read()) 	<< "\t\t\t||\tconv0_out[193599]: \t\t"	<<double(conv0_out_last.read())<<endl;
@@ -145,8 +145,8 @@ void Monitor:: run() {
 		cout<<"out_valid_linear2: \t"	<< out_valid_linear2 << 
 				"\t||\tlinear2_out[0]: \t"<< linear2_out[0] 	<< "\t\t\t||\t1000[999]: \t\t"			<<linear2_out[999]<<endl;
 		*/
-		cout<<fixed<<setprecision(8)<<"in_valid_pat: \t\t"		<< in_valid_pat		 << 
-				"\t||\timg_out[0]: \t\t"	<< double(img_out_first.read()) 		<< "\t\t\t||\timg_out[150527]: \t\t"	<<double(img_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"in_valid_pat: \t\t"		<< in_valid_pat->read()		 << 
+		//		"\t||\timg_out[0]: \t\t"	<< double(img_out_first->read()) 		<< "\t\t\t||\timg_out[150527]: \t\t"	<<double(img_out_last->read())<<endl;
 		
 		cout<<fixed<<setprecision(8)<<"out_valid_conv0: \t"	<< out_valid_conv0	 << 
 				"\t||\tconv0_out[0]: \t\t"	<< double(conv0_out_first.read()) 	<< "\t\t\t||\tconv0_out[193599]: \t\t"	<<double(conv0_out_last.read())<<endl;

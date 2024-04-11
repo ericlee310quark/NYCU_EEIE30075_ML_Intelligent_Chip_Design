@@ -12,12 +12,15 @@ SC_MODULE( Monitor ) {
 	sc_in < bool > rst;
 	sc_in_clk clock;
 	
-	sc_in <bool> in_valid_pat;
+	//sc_in <bool> in_valid_pat;
+	//sc_port<sc_fifo_in_if <bool>> in_valid_pat;
 	//sc_vector<sc_in<sc_fixed_fast<46,17>>> img_out{"img_out", 150528};
-	sc_in<sc_fixed_fast<46,17>> img_out_first;
-	sc_in<sc_fixed_fast<46,17>> img_out_last;
+	//sc_in<sc_fixed_fast<46,17>> img_out_first;
+	//sc_in<sc_fixed_fast<46,17>> img_out_last;
+	//sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>> img_out_first;
+	//sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>> img_out_last;
 
-		sc_in <bool> out_valid_conv0;
+	sc_in <bool> out_valid_conv0;
 	//sc_vector<sc_in<sc_fixed_fast<46,17>>> conv0_out{"conv0_out",193600};
 	sc_in<sc_fixed_fast<46,17>> conv0_out_first;
 	sc_in<sc_fixed_fast<46,17>> conv0_out_last;
