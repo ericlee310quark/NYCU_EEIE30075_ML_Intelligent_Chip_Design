@@ -168,16 +168,13 @@ SC_MODULE(conv2d_0)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	//sc_in <bool> in_valid;
-	sc_port<sc_fifo_in_if <bool>> in_valid;
-	sc_out <bool> out_valid;
 
-	
+	sc_port<sc_fifo_in_if <bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+		
 	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",150528};
-	//std::vector<sc_fixed_fast<46,17>> in_feature_tmp(150528);//{"in_feature",150528};
-				
-	//sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",150528};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",193600};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",193600};
+
 
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> after_padding{"after_padding",154587};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",23232};
@@ -203,125 +200,82 @@ SC_MODULE(conv2d_0)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				//weight[cnt].write((sc_fixed_fast<46,17>) (element));
 				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				//bias[cnt].write((sc_fixed_fast<46,17>) (element));
-				//bias[cnt] = element;
 				bias.push_back(element);
 				cnt ++;
 			}
 			weight_file.close();
 			bias_file.close();
-
-			for(int i=0;i<out_ch*out_height*out_width;i++){
-				out_feature[i].write(0);
-			}
-			out_valid.write(0);
 			cout<<"**********************************************************************************************"<<endl;
 			cout<<"*                                Finish Load Conv0 Parameters                                *"<<endl;
 			cout<<"**********************************************************************************************"<<endl;
 
-
-			if(in_valid->num_available()!=0){
-				in_valid->read();
-				for(int i=0;i<150528;i++){
-					in_feature[i]->read();
-					//std::cout<<"here: "<<in_feature_tmp[i]<<std::endl;
-				}
-
-			}
-
 			return;
 		}
-		else{
-			std::cout<<"HEREERERERERERERERERERER"<<std::endl;
-			std::cout<<"in_valid fifo_ele: "<<in_valid->num_available()<<std::endl;
-			std::cout<<"in_feature[0] fifo_ele: "<<in_feature[0]->num_available()<<std::endl;
-			
-			if(in_valid->num_available()!=0 &&(in_valid->read()==1)){
-			
-				//TODO sc_out
-				int out_feature_idx = 0;
-				int in_feature_y = 0;
-				int in_feature_x = 0;
-
-				int in_feature_idx = 0;
-				int weight_idx = 0;
-				std::vector<sc_fixed_fast<46,17>> in_feature_tmp(150528);//{"in_feature",150528};
+		bool in_valid_nb;
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(150528);
 	
-				for(int i=0;i<150528;i++){
-					in_feature_tmp[i] = in_feature[i]->read();
-					//std::cout<<"here: "<<in_feature_tmp[i]<<std::endl;
-				}
-				std::cout<<"in_valid fifo_ele: "<<in_valid->num_available()<<std::endl;
-			std::cout<<"in_feature[0] fifo_ele: "<<in_feature[0]->num_available()<<std::endl;
-			std::cout<<"123454879798"<<std::endl;
-				
-	
+		for(int i=0;i<150528;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
+		
+			int out_feature_idx = 0;
+			int in_feature_y = 0;
+			int in_feature_x = 0;
 
-				//sc_fixed_fast<46,17> partial_sum;
-				double partial_sum;
-				for(int o_c=0;o_c<out_ch;o_c++){
-					for(int o_y=0;o_y<out_height;o_y++){
-						for(int o_x=0;o_x<out_width;o_x++){  
-							partial_sum = 0;
-							for(int i_c=0;i_c<in_ch;i_c++){
-								for(int k_y=-5;k_y<6;k_y++){
-									for(int k_x=-5;k_x<6;k_x++){
-										in_feature_y = stride*o_y+k_y+5-2;
-										in_feature_x = stride*o_x+k_x+5-2;
-										if(!((in_feature_y<0)||(in_feature_x<0)||(in_feature_y>=in_height)||(in_feature_x>=in_width))){
-											in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
-											weight_idx = (o_c*in_ch*11*11)+(i_c*11*11)+((k_y+5)*(11))+(k_x+5);
-											//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
-											partial_sum+= ((in_feature_tmp[in_feature_idx]) * weight[weight_idx]);
-											//std::cout<<"o_c: "<<o_c<<"| o_y: "<<o_y<<"| i_c: "<<i_c<<"| k_y: "<<k_y<<"| k_x: "<<k_x<<std::endl;
-										}
+			int in_feature_idx = 0;
+			int weight_idx = 0;
+
+			double partial_sum;
+			for(int o_c=0;o_c<out_ch;o_c++){
+				for(int o_y=0;o_y<out_height;o_y++){
+					for(int o_x=0;o_x<out_width;o_x++){  
+						partial_sum = 0;
+						for(int i_c=0;i_c<in_ch;i_c++){
+							for(int k_y=-5;k_y<6;k_y++){
+								for(int k_x=-5;k_x<6;k_x++){
+									in_feature_y = stride*o_y+k_y+5-2;
+									in_feature_x = stride*o_x+k_x+5-2;
+									if(!((in_feature_y<0)||(in_feature_x<0)||(in_feature_y>=in_height)||(in_feature_x>=in_width))){
+										in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
+										weight_idx = (o_c*in_ch*11*11)+(i_c*11*11)+((k_y+5)*(11))+(k_x+5);
+										//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
+										partial_sum+= ((in_feature_tmp[in_feature_idx]) * weight[weight_idx]);
+										//std::cout<<"o_c: "<<o_c<<"| o_y: "<<o_y<<"| i_c: "<<i_c<<"| k_y: "<<k_y<<"| k_x: "<<k_x<<std::endl;
 									}
 								}
 							}
-							out_feature_idx = (o_c * out_height * out_width)  + (o_y * out_width) + o_x;
-							if((bias[o_c] + partial_sum)<0){
-								out_feature[out_feature_idx] = 0;	
-							}
-							else{
-								partial_sum += bias[o_c];
-								out_feature[out_feature_idx] = (double)partial_sum;//bias[o_c] + partial_sum;
-							}
-							/*
-							if((o_c==0)&&(o_y==0)&&(o_x==0)){
-								cout<<"conv0_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
-							}
-							*/
+						}
+						out_feature_idx = (o_c * out_height * out_width)  + (o_y * out_width) + o_x;
+						if((bias[o_c] + partial_sum)<0){
+							out_feature[out_feature_idx]->write(0);
+						}
+						else{
+							partial_sum += bias[o_c];
+							out_feature[out_feature_idx]->write((sc_fixed_fast<46,17>)partial_sum);
 						}
 					}
 				}
-				out_valid.write(1);
-				//weight.clear();
-				//bias.clear();
 			}
-			else{
-
-				if(in_feature[0]->num_available()>0){
-					for(int i=0;i<150528;i++){
-						in_feature[i]->read();
-						//std::cout<<"here: "<<in_feature_tmp[i]<<std::endl;
-					}
-				}
-
-				for(int i=0;i<out_ch*out_height*out_width;i++){
-					out_feature[i].write(out_feature[i]);
-				}
-				out_valid.write(0);
-			}
+			out_valid->write(1);
 		}
-
+		else{
+			
+			for(int i=0;i<out_ch*out_height*out_width;i++){
+				out_feature[i]->write(0);
+			}
+			out_valid->write(0);
+		}
 	}
+		
+
+	
 	
 	
 	SC_CTOR(conv2d_0)
@@ -345,49 +299,69 @@ SC_MODULE(conv2d_0)
 SC_MODULE(MAX_POOLING_0)
 {
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",193600};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",46656};
-	
-	void run(){
-		if(in_valid.read()==1){
-			const int OUT_CHANNEL =64;
-			const int OUT_SIZE = 27;
+	sc_port<sc_fifo_in_if<bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",193600};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",46656};
 
-			const int IN_CHANNEL = 64;
-			const int IN_SIZE = 55;
-			const int STRIDE = 2;
-			int in_feature_x = 0;
-			int in_feature_y = 0;
-			sc_fixed_fast<46,17> temp_large;
-			for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
-				for(int o_y=0;o_y<OUT_SIZE;o_y++){
-					for(int o_x=0;o_x<OUT_SIZE;o_x++){
-						temp_large = 0;
-						for(int k_y=-1;k_y<=1;k_y++){
-							for(int k_x=-1;k_x<=1;k_x++){
-								in_feature_y = o_y * STRIDE + 1 + k_y;
-								in_feature_x = o_x * STRIDE + 1 + k_x;
-								if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
-									temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+	void run(){
+		bool in_valid_nb;
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(193600);
+	
+		for(int i=0;i<193600;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+
+
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
+			
+				const int OUT_CHANNEL =64;
+				const int OUT_SIZE = 27;
+
+				const int IN_CHANNEL = 64;
+				const int IN_SIZE = 55;
+				const int STRIDE = 2;
+				int in_feature_x = 0;
+				int in_feature_y = 0;
+				sc_fixed_fast<46,17> temp_large;
+
+
+				for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
+					for(int o_y=0;o_y<OUT_SIZE;o_y++){
+						for(int o_x=0;o_x<OUT_SIZE;o_x++){
+							temp_large = 0;
+							for(int k_y=-1;k_y<=1;k_y++){
+								for(int k_x=-1;k_x<=1;k_x++){
+									in_feature_y = o_y * STRIDE + 1 + k_y;
+									in_feature_x = o_x * STRIDE + 1 + k_x;
+									if(in_feature_tmp[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
+										temp_large = in_feature_tmp[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+									}
 								}
 							}
+							//out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
+							out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x]->write(temp_large);
+							/*
+							if((o_c==0)&&(o_y==0)&&(o_x==0)){
+								cout<<"maxpooling_0_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
+							}
+							*/
 						}
-						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
-						/*
-						if((o_c==0)&&(o_y==0)&&(o_x==0)){
-							cout<<"maxpooling_0_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
-						}
-						*/
 					}
 				}
+				out_valid->write(1);
 			}
-			out_valid.write(1);
-		}
 		else{
-			out_valid.write(0);
+			for(int i=0;i<46656;i++){
+				out_feature[i]->write(0);
+			}
+				
+			out_valid->write(0);
+			
 		}
+
+
 	}
 	SC_CTOR(MAX_POOLING_0)
 	{
@@ -422,12 +396,13 @@ SC_MODULE(conv2d_1)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
+	
+	sc_port<sc_fifo_in_if <bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",46656};
 
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",46656};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",139968};
-
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",139968};
+	
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> after_padding{"after_padding",154587};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",307200};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> bias{"bias",192};
@@ -448,48 +423,35 @@ SC_MODULE(conv2d_1)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				//weight[cnt].write((sc_fixed_fast<46,17>) (element));
 				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				//bias[cnt].write((sc_fixed_fast<46,17>) (element));
 				bias.push_back(element);
 				cnt ++;
-			}
-			/*
-			for(int i =0;i<64;i++){
-				cout<<"weight_"<<i<<": "<<weight[i]<<endl;
-			}
-
-			for(int i =0;i<64;i++){
-				cout<<"bias_"<<i<<": "<<bias[i]<<endl;
-			}
-			*/
-			//weight_file.close();
-			//bias_file.close();
-
-			for(int i=0;i<out_ch*out_height*out_width;i++){
-				out_feature[i].write(0);
 			}
 			cout<<"**********************************************************************************************"<<endl;
 			cout<<"*                                Finish Load Conv1 Parameters                                *"<<endl;
 			cout<<"**********************************************************************************************"<<endl;
-			out_valid.write(0);
 			return;
 		}
-		//else{
-		if(in_valid.read()==1){
-//TODO sc_out
+
+		bool in_valid_nb;
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(46656);
+	
+		for(int i=0;i<46656;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
+		//TODO sc_out
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
 
 			int in_feature_idx = 0;
 			int weight_idx = 0;
-			//sc_fixed_fast<46,17> partial_sum;
 			double partial_sum;
 
 			for(int o_c=0;o_c<out_ch;o_c++){
@@ -507,40 +469,37 @@ SC_MODULE(conv2d_1)
 										in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
 										weight_idx = (o_c*in_ch*kernel_size*kernel_size)+(i_c*kernel_size*kernel_size)+((k_y+int(kernel_size/2))*(kernel_size))+(k_x+int(kernel_size/2));
 										//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
-										partial_sum+= (in_feature[in_feature_idx]*weight[weight_idx]);
+										partial_sum+= (in_feature_tmp[in_feature_idx]*weight[weight_idx]);
 									}
 								}
 							}
 						}
 						out_feature_idx = (o_c * out_height * out_width)  + (o_y * out_width) + o_x;
 						if((bias[o_c] + partial_sum)<0){
-							out_feature[out_feature_idx] = 0;	
+							out_feature[out_feature_idx]->write(0);	
 						}
 						else{
 							partial_sum+=bias[o_c];
-							//out_feature[out_feature_idx] = bias[o_c] + partial_sum;
-							out_feature[out_feature_idx] = (sc_fixed_fast<46,17>)partial_sum;
+							out_feature[out_feature_idx]->write((sc_fixed_fast<46,17>)partial_sum);
+						
 						}
-						/*
-						if((o_c==0)&&(o_y==0)&&(o_x==0)){
-							cout<<"conv1_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
-						}
-						*/
+
 					}
 				}
 			}
-			out_valid.write(1);
+			out_valid->write(1);
 			//weight.clear();
 			//bias.clear();
 		}
 		else{
 			for(int i=0;i<out_ch*out_height*out_width;i++){
-				out_feature[i].write(out_feature[i]);
+				out_feature[i]->write(0);
 			}
-			out_valid.write(0);
+			out_valid->write(0);
 		}		
+
+
 	}
-	
 	SC_CTOR(conv2d_1)
 	{
 		SC_METHOD(run);
@@ -560,21 +519,29 @@ SC_MODULE(conv2d_1)
 SC_MODULE(MAX_POOLING_1)
 {
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",139968};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",32448};
-	
-	void run(){
-		const int OUT_CHANNEL =192;
-		const int OUT_SIZE = 13;
 
-		const int IN_CHANNEL = 192;
-		const int IN_SIZE = 27;
-		const int STRIDE = 2;
-		int in_feature_x = 0;
-		int in_feature_y = 0;
-		if(in_valid.read()==1){
+	sc_port<sc_fifo_in_if<bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",139968};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",32448};
+
+	void run(){
+		bool in_valid_nb;
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(139968);
+	
+		for(int i=0;i<139968;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
+
+			const int OUT_CHANNEL =192;
+			const int OUT_SIZE = 13;
+
+			const int IN_CHANNEL = 192;
+			const int IN_SIZE = 27;
+			const int STRIDE = 2;
+			int in_feature_x = 0;
+			int in_feature_y = 0;
 
 			sc_fixed_fast<46,17> temp_large;
 			for(int o_c=0;o_c<OUT_CHANNEL;o_c++){
@@ -585,26 +552,27 @@ SC_MODULE(MAX_POOLING_1)
 							for(int k_x=-1;k_x<=1;k_x++){
 								in_feature_y = o_y * STRIDE + 1 + k_y;
 								in_feature_x = o_x * STRIDE + 1 + k_x;
-								if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
-									temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+								if(in_feature_tmp[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
+									temp_large = in_feature_tmp[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
 								}
 							}
 						}
-						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
-						/*
-						if((o_c==0)&&(o_y==0)&&(o_x==0)){
-							cout<<"maxpooling_1_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
-						}
-						*/
+						//out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
+						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x]->write(temp_large);
 					}
 				}
 
 			}
-			out_valid.write(1);
+			out_valid->write(1);
 		}
 		else{
-			out_valid.write(0);
+			for(int i=0;i<32448;i++){
+				out_feature[i]->write(0);
+			}
+			out_valid->write(0);
 		}
+	
+
 	}
 	SC_CTOR(MAX_POOLING_1)
 	{
@@ -639,11 +607,12 @@ SC_MODULE(conv2d_2)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
 
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",32448};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",64896};
+	sc_port<sc_fifo_in_if <bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",32448};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",64896};
 
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> after_padding{"after_padding",154587};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",663552};
@@ -665,40 +634,33 @@ SC_MODULE(conv2d_2)
 			int cnt = 0;
 			//std::vector <double> numbers;
 			while (weight_file >> element) {
-				//weight[cnt].write((sc_fixed_fast<46,17>) (element));
 				weight.push_back(element);
 				cnt ++;
 			}
 
 			cnt = 0;
 			while (bias_file >> element) {
-				//bias[cnt].write((sc_fixed_fast<46,17>) (element));
 				bias.push_back(element);
 				cnt ++;
 			}
-			/*
-			for(int i =0;i<64;i++){
-				cout<<"weight_"<<i<<": "<<weight[i]<<endl;
-			}
-
-			for(int i =0;i<64;i++){
-				cout<<"bias_"<<i<<": "<<bias[i]<<endl;
-			}
-			*/
 			weight_file.close();
 			bias_file.close();
 
-			for(int i=0;i<out_ch*out_height*out_width;i++){
-				out_feature[i].write(0);
-			}
 			cout<<"**********************************************************************************************"<<endl;
 			cout<<"*                                Finish Load Conv2 Parameters                                *"<<endl;
 			cout<<"**********************************************************************************************"<<endl;
-			out_valid.write(0);
 			return;
 		}
 		//else{
-		if(in_valid.read()==1){
+		bool in_valid_nb;
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(32448);
+	
+		for(int i=0;i<32448;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
 
 
 			//TODO sc_out
@@ -726,34 +688,33 @@ SC_MODULE(conv2d_2)
 										in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
 										weight_idx = (o_c*in_ch*kernel_size*kernel_size)+(i_c*kernel_size*kernel_size)+((k_y+int(kernel_size/2))*(kernel_size))+(k_x+int(kernel_size/2));
 										//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
-										partial_sum+= (in_feature[in_feature_idx]*weight[weight_idx]);
+										partial_sum+= (in_feature_tmp[in_feature_idx]*weight[weight_idx]);
 									}
 								}
 							}
 						}
 						out_feature_idx = (o_c * out_height * out_width)  + (o_y * out_width) + o_x;
 						if((bias[o_c] + partial_sum)<0){
-							out_feature[out_feature_idx] = 0;	
+							out_feature[out_feature_idx]->write(0);	
 						}
 						else{
 							partial_sum+=bias[o_c];
-							out_feature[out_feature_idx] = (sc_fixed_fast<46,17>)partial_sum;//bias[o_c] + partial_sum;
+							out_feature[out_feature_idx]->write((sc_fixed_fast<46,17>)partial_sum);//bias[o_c] + partial_sum;
 						}
-						/*
-						if((o_c==0)&&(o_y==0)&&(o_x==0)){
-							cout<<"conv2_relu_out_feature["<<o_c<<",0,0]: "<< out_feature[out_feature_idx] <<endl;
-						}
-						*/
 					}
 				}
 			}
-			out_valid.write(1);
+			out_valid->write(1);
 			//weight.clear();
 			//bias.clear();
 		}
 		else{
-			out_valid.write(0);
+			for(int i=0;i<out_ch*out_height*out_width;i++){
+				out_feature[i]->write(0);
+			}
+			out_valid->write(0);
 		}
+
 	}
 	
 	SC_CTOR(conv2d_2)
@@ -790,11 +751,13 @@ SC_MODULE(conv2d_3)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
+	
+	sc_port<sc_fifo_in_if <bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",64896};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",43264};
+	
 
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",64896};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",43264};
 
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> after_padding{"after_padding",154587};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",884736};
@@ -830,20 +793,23 @@ SC_MODULE(conv2d_3)
 
 			weight_file.close();
 			bias_file.close();
-
-			for(int i=0;i<out_ch*out_height*out_width;i++){
-				out_feature[i].write(0);
-			}
 			cout<<"**********************************************************************************************"<<endl;
 			cout<<"*                                Finish Load Conv3 Parameters                                *"<<endl;
 			cout<<"**********************************************************************************************"<<endl;
-			out_valid.write(0);
-
 			return;
 		}
 		//else{
 			//TODO sc_out
-		if(in_valid.read()){
+
+		bool in_valid_nb;
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(64896);
+	
+		for(int i=0;i<64896;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -868,18 +834,18 @@ SC_MODULE(conv2d_3)
 										in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
 										weight_idx = (o_c*in_ch*kernel_size*kernel_size)+(i_c*kernel_size*kernel_size)+((k_y+int(kernel_size/2))*(kernel_size))+(k_x+int(kernel_size/2));
 										//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
-										partial_sum+= (in_feature[in_feature_idx]*weight[weight_idx]);
+										partial_sum+= (in_feature_tmp[in_feature_idx]*weight[weight_idx]);
 									}
 								}
 							}
 						}
 						out_feature_idx = (o_c * out_height * out_width)  + (o_y * out_width) + o_x;
 						if((bias[o_c] + partial_sum)<0){
-							out_feature[out_feature_idx] = 0;	
+							out_feature[out_feature_idx]->write(0);	
 						}
 						else{
 							partial_sum+=bias[o_c];
-							out_feature[out_feature_idx] = (sc_fixed_fast<46,17>)partial_sum;//bias[o_c] + partial_sum;
+							out_feature[out_feature_idx]->write((sc_fixed_fast<46,17>)partial_sum);//bias[o_c] + partial_sum;
 						}
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
@@ -889,13 +855,19 @@ SC_MODULE(conv2d_3)
 					}
 				}
 			}
-			out_valid.write(1);
-			//weight.clear();
-			//bias.clear();
+			out_valid->write(1);
+		//weight.clear();
+		//bias.clear();
 		}
 		else{
-			out_valid.write(0);
+			for(int i=0;i<out_ch*out_height*out_width;i++){
+				out_feature[i]->write(0);
+			}
+			out_valid->write(0);
 		}
+
+
+		
 	}
 
 
@@ -937,12 +909,20 @@ SC_MODULE(conv2d_4)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
+	//sc_in <bool> in_valid;
+	//sc_out <bool> out_valid;
 
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",43264};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",43264};
+	//sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",43264};
+	//sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",43264};
 
+
+
+	sc_port<sc_fifo_in_if <bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	//sc_out <bool> out_valid;
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",43264};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",43264};
+	//sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",43264};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> after_padding{"after_padding",154587};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",589824};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> bias{"bias",256};
@@ -977,18 +957,27 @@ SC_MODULE(conv2d_4)
 			weight_file.close();
 			bias_file.close();
 
-			for(int i=0;i<out_ch*out_height*out_width;i++){
-				out_feature[i].write(0);
-			}
+
 			cout<<"**********************************************************************************************"<<endl;
 			cout<<"*                                Finish Load Conv4 Parameters                                *"<<endl;
 			cout<<"**********************************************************************************************"<<endl;
-			out_valid.write(0);
 			return;
 		}
 		//else{
 			//TODO sc_out
-		if(in_valid.read()){
+		bool in_valid_nb;
+				
+
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(43264);//{"in_feature",150528};
+		
+		for(int i=0;i<43264;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
+
+
+
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -1013,18 +1002,18 @@ SC_MODULE(conv2d_4)
 										in_feature_idx = (i_c*in_height*in_width)+(in_feature_y*in_width)+(in_feature_x);
 										weight_idx = (o_c*in_ch*kernel_size*kernel_size)+(i_c*kernel_size*kernel_size)+((k_y+int(kernel_size/2))*(kernel_size))+(k_x+int(kernel_size/2));
 										//partial_sum+= (in_feature[i_c][in_feature_y][in_feature_x]*weight[o_c][i_c][5+k_y][5+k_x]);
-										partial_sum+= (in_feature[in_feature_idx]*weight[weight_idx]);
+										partial_sum+= (in_feature_tmp[in_feature_idx]*weight[weight_idx]);
 									}
 								}
 							}
 						}
 						out_feature_idx = (o_c * out_height * out_width)  + (o_y * out_width) + o_x;
 						if((bias[o_c] + partial_sum)<0){
-							out_feature[out_feature_idx] = 0;	
+							out_feature[out_feature_idx]->write(0);	
 						}
 						else{
 							partial_sum+=bias[o_c];
-							out_feature[out_feature_idx] = (sc_fixed_fast<46,17>)partial_sum;//[o_c] + partial_sum;
+							out_feature[out_feature_idx]->write((sc_fixed_fast<46,17>)partial_sum);//[o_c] + partial_sum;
 						}
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
@@ -1034,12 +1023,15 @@ SC_MODULE(conv2d_4)
 					}
 				}
 			}
-			out_valid.write(1);
+			out_valid->write(1);
 			//weight.clear();
 			//bias.clear();
 		}
 		else{
-			out_valid.write(0);
+			for(int i=0;i<out_ch*out_height*out_width;i++){
+				out_feature[i]->write(0);
+			}
+			out_valid->write(0);
 		}
 	}
 	
@@ -1064,13 +1056,28 @@ SC_MODULE(conv2d_4)
 SC_MODULE(MAX_POOLING_2)
 {
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",43264};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",9216};
+	//sc_in <bool> in_valid;
+	//sc_out <bool> out_valid;
+	//sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",43264};
+	//sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",9216};
+
+
+
+	sc_port<sc_fifo_in_if<bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",43264};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",9216};
+
 	
 	void run(){
-		if(in_valid.read()==1){
+		bool in_valid_nb;
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(43264);//{"in_feature",150528};
+		
+		for(int i=0;i<43264;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+		if(in_valid->nb_read(in_valid_nb)&&(in_valid_nb)){
 			const int OUT_CHANNEL =256;
 			const int OUT_SIZE = 6;
 
@@ -1089,12 +1096,12 @@ SC_MODULE(MAX_POOLING_2)
 							for(int k_x=-1;k_x<=1;k_x++){
 								in_feature_y = o_y * STRIDE + 1 + k_y;
 								in_feature_x = o_x * STRIDE + 1 + k_x;
-								if(in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
-									temp_large = in_feature[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
+								if(in_feature_tmp[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x]>temp_large){
+									temp_large = in_feature_tmp[(o_c*IN_SIZE*IN_SIZE)+(in_feature_y*IN_SIZE)+in_feature_x];
 								}
 							}
 						}
-						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] = temp_large;
+						out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x]->write(temp_large);
 						/*
 						if((o_c==0)&&(o_y==0)&&(o_x==0)){
 							cout<<"maxpooling_2_out["<<o_c<<",0,0]: "<< out_feature[(o_c*OUT_SIZE*OUT_SIZE)+(o_y*OUT_SIZE)+o_x] <<endl;
@@ -1103,10 +1110,14 @@ SC_MODULE(MAX_POOLING_2)
 					}
 				}
 			}
-			out_valid.write(1);
+			out_valid->write(1);
 		}
 		else{
-			out_valid.write(0);
+
+			for(int i=0;i<9216;i++){
+				out_feature[i]->write(0);
+			}
+			out_valid->write(0);
 		}
 	}
 	SC_CTOR(MAX_POOLING_2)
@@ -1136,11 +1147,19 @@ SC_MODULE(LINEAR0_RELU)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
+	//sc_in <bool> in_valid;
+	//sc_out <bool> out_valid;
 
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",9216};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",4096};
+	//sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",9216};
+	//sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",4096};
+
+
+	sc_port<sc_fifo_in_if <bool>> in_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",9216};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",4096};
+
+
 
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",37748736};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> bias{"bias",4096};
@@ -1174,17 +1193,24 @@ SC_MODULE(LINEAR0_RELU)
 			weight_file.close();
 			bias_file.close();
 
-			for(int i=0;i<out_ch;i++){
-				out_feature[i].write(0);
-			}
 			cout<<"**********************************************************************************************"<<endl;
 			cout<<"*                                Finish Load Linear0 Parameters                              *"<<endl;
 			cout<<"**********************************************************************************************"<<endl;
-			out_valid.write(0);
 			return;
 		}
 		//else{
-		if(in_valid.read()==1){
+
+		
+		bool in_valid_nb;
+				
+
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(9216);//{"in_feature",150528};
+		
+		for(int i=0;i<9216;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -1196,14 +1222,14 @@ SC_MODULE(LINEAR0_RELU)
 			for(int o_c=0;o_c<out_ch;o_c++){
 				partial_sum = 0;
 				for(int i_c=0;i_c<in_ch;i_c++){
-					partial_sum+=(in_feature[i_c]*weight[(o_c*in_ch) + i_c]);
+					partial_sum+=(in_feature_tmp[i_c]*weight[(o_c*in_ch) + i_c]);
 				}
 				if((partial_sum + bias[o_c])<0){
-					out_feature[o_c] = 0;
+					out_feature[o_c]->write(0);
 				}
 				else {
 					partial_sum+=bias[o_c];
-					out_feature[o_c] = (sc_fixed_fast<46,17>)partial_sum;//partial_sum + bias[o_c];
+					out_feature[o_c]->write((sc_fixed_fast<46,17>)partial_sum);//partial_sum + bias[o_c];
 				}
 				/*
 				if(o_c==0){
@@ -1211,15 +1237,15 @@ SC_MODULE(LINEAR0_RELU)
 				}
 				*/
 			}
-			out_valid.write(1);
+			out_valid->write(1);
 			//weight.clear();
 			//bias.clear();
 		}
 		else{
 			for(int i=0;i<out_ch;i++){
-				//out_feature[i].write(0);
+				out_feature[i]->write(0);
 			}
-			out_valid.write(0);
+			out_valid->write(0);
 		}
 	}
 	
@@ -1249,11 +1275,16 @@ SC_MODULE(LINEAR1_RELU)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
-	sc_out <bool> out_valid;
+	//sc_in <bool> in_valid;
+	sc_port<sc_fifo_in_if <bool>> in_valid;
+	
+	//sc_out <bool> out_valid;
+	sc_port<sc_fifo_out_if <bool>> out_valid;
+	//sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",4096};
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",4096};
 
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",4096};
-	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",4096};
+	//sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",4096};
+	sc_vector<sc_port<sc_fifo_out_if<sc_fixed_fast<46,17>>>> out_feature{"out_feature",4096};
 
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",16777216};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> bias{"bias",4096};
@@ -1288,17 +1319,25 @@ SC_MODULE(LINEAR1_RELU)
 			weight_file.close();
 			bias_file.close();
 
-			for(int i=0;i<out_ch;i++){
-				out_feature[i].write(0);
-			}
+
 			cout<<"**********************************************************************************************"<<endl;
 			cout<<"*                                Finish Load Linear1 Parameters                              *"<<endl;
 			cout<<"**********************************************************************************************"<<endl;
-			out_valid.write(0);
 			return;
 		}
 		//else{
-		if(in_valid.read()==1){
+
+		bool in_valid_nb;
+				
+
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(4096);//{"in_feature",150528};
+		
+		for(int i=0;i<4096;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -1310,14 +1349,14 @@ SC_MODULE(LINEAR1_RELU)
 			for(int o_c=0;o_c<out_ch;o_c++){
 				partial_sum = 0;
 				for(int i_c=0;i_c<in_ch;i_c++){
-					partial_sum+=(in_feature[i_c]*weight[(o_c*in_ch)+i_c]);
+					partial_sum+=(in_feature_tmp[i_c]*weight[(o_c*in_ch)+i_c]);
 				}
 				if((partial_sum + bias[o_c])<0){
-					out_feature[o_c] = 0;
+					out_feature[o_c]->write(0);
 				}
 				else {
 					partial_sum+=bias[o_c];
-					out_feature[o_c] = (sc_fixed_fast<46,17>)partial_sum;//partial_sum + bias[o_c];
+					out_feature[o_c]->write((sc_fixed_fast<46,17>)partial_sum);//partial_sum + bias[o_c];
 				}
 				/*
 				if(o_c==0){
@@ -1325,15 +1364,15 @@ SC_MODULE(LINEAR1_RELU)
 				}
 				*/
 			}
-			out_valid.write(1);
+			out_valid->write(1);
 			//weight.clear();
 			//bias.clear();
 		}
 		else{
 			for(int i=0;i<out_ch;i++){
-				//out_feature[i].write(0);
+				out_feature[i]->write(0);
 			}
-			out_valid.write(0);
+			out_valid->write(0);
 		}
 	}
 	
@@ -1362,11 +1401,17 @@ SC_MODULE(LINEAR2)
 
 	sc_in < bool > rst;
 	sc_in_clk clock;
-	sc_in <bool> in_valid;
+	sc_port<sc_fifo_in_if <bool>> in_valid;
 	sc_out <bool> out_valid;
 
-	sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",4096};
+	//sc_vector<sc_in<sc_fixed_fast<46,17>>> in_feature{"in_feature",4096};
+	sc_vector<sc_port<sc_fifo_in_if<sc_fixed_fast<46,17>>>> in_feature{"in_feature",4096};
 	sc_vector<sc_out<sc_fixed_fast<46,17>>> out_feature{"out_feature",1000};
+
+
+
+
+
 
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> weight{"weight",4096000};
 	//sc_vector<sc_signal<sc_fixed_fast<46,17>>> bias{"bias",1000};
@@ -1411,7 +1456,18 @@ SC_MODULE(LINEAR2)
 			return;
 		}
 		//else{
-		if(in_valid==1){
+
+
+		bool in_valid_nb;
+				
+
+		std::vector<sc_fixed_fast<46,17>> in_feature_tmp(4096);//{"in_feature",150528};
+		
+		for(int i=0;i<4096;i++){
+			in_feature[i]->nb_read(in_feature_tmp[i]);
+		}
+
+		if(in_valid->nb_read(in_valid_nb) && (in_valid_nb)){
 			int out_feature_idx = 0;
 			int in_feature_y = 0;
 			int in_feature_x = 0;
@@ -1423,7 +1479,7 @@ SC_MODULE(LINEAR2)
 			for(int o_c=0;o_c<out_ch;o_c++){
 				partial_sum = 0;
 				for(int i_c=0;i_c<in_ch;i_c++){
-					partial_sum+=(in_feature[i_c]*weight[(o_c*in_ch)+i_c]);
+					partial_sum+=(in_feature_tmp[i_c]*weight[(o_c*in_ch)+i_c]);
 				}
 				partial_sum+=bias[o_c];
 				out_feature[o_c] = (sc_fixed_fast<46,17>)partial_sum;//partial_sum + bias[o_c];

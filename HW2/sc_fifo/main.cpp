@@ -23,32 +23,67 @@ int sc_main( int argc, char* argv[] ) {
 	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> img_out{"img_out", 150528};
 	//sc_vector<sc_fifo_out<sc_fixed_fast<46,17>>> img_out_fout{"img_out", 150528};
 
-	sc_buffer <bool> out_valid_conv0;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv0_out{"conv0_out",193600};
+	//sc_buffer <bool> out_valid_conv0;
+	sc_fifo <bool> out_valid_conv0;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv0_out{"conv0_out",193600};
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> conv0_out{"conv0_out",193600};
 	
-	sc_buffer <bool> out_valid_max0;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max0_out{"max0_out",46656};
-	
-	sc_buffer <bool> out_valid_conv1;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv1_out{"conv1_out",139968};
 
-	sc_buffer <bool> out_valid_max1;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max1_out{"max1_out",32448};
+	//sc_buffer <bool> out_valid_max0;
+	sc_fifo <bool> out_valid_max0;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max0_out{"max0_out",46656};
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> max0_out{"max0_out",46656};
 	
-	sc_buffer <bool> out_valid_conv2;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv2_out{"conv2_out",64896};
-	sc_buffer <bool> out_valid_conv3;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv3_out{"conv3_out",43264};
-	sc_buffer <bool> out_valid_conv4;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv4_out{"conv4_out",43264};
 
-	sc_buffer <bool> out_valid_max2;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max2_out{"max2_out",9216};
-	
-	sc_buffer <bool> out_valid_linear0;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear0_out{"linear0_out",4096};
-	sc_buffer <bool> out_valid_linear1;
-	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear1_out{"linear1_out",4096};
+	//sc_buffer <bool> out_valid_conv1;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv1_out{"conv1_out",139968};
+	sc_fifo <bool> out_valid_conv1;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> conv1_out{"conv1_out",139968};
+
+	//sc_buffer <bool> out_valid_max1;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max1_out{"max1_out",32448};
+	sc_fifo <bool> out_valid_max1;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> max1_out{"max1_out",32448};
+
+
+
+
+	//sc_buffer <bool> out_valid_conv2;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv2_out{"conv2_out",64896};
+	sc_fifo <bool> out_valid_conv2;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> conv2_out{"conv2_out",64896};
+
+	//sc_buffer <bool> out_valid_conv3;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv3_out{"conv3_out",43264};
+	sc_fifo <bool> out_valid_conv3;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> conv3_out{"conv3_out",43264};
+
+	//sc_buffer <bool> out_valid_conv4;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> conv4_out{"conv4_out",43264};
+	sc_fifo <bool> out_valid_conv4;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> conv4_out{"conv4_out",43264};
+
+
+	//sc_buffer <bool> out_valid_max2;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> max2_out{"max2_out",9216};
+	sc_fifo <bool> out_valid_max2;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> max2_out{"max2_out",9216};
+
+
+
+	//sc_buffer <bool> out_valid_linear0;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear0_out{"linear0_out",4096};
+	sc_fifo <bool> out_valid_linear0;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> linear0_out{"linear0_out",4096};
+
+
+
+	//sc_buffer <bool> out_valid_linear1;
+	//sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear1_out{"linear1_out",4096};
+	sc_fifo <bool> out_valid_linear1;
+	sc_vector<sc_fifo<sc_fixed_fast<46,17>>> linear1_out{"linear1_out",4096};
+
+
 	sc_buffer <bool> out_valid_linear2;
 	sc_vector<sc_buffer<sc_fixed_fast<46,17>>> linear2_out{"linear2_out",1000};
 	
@@ -97,48 +132,48 @@ int sc_main( int argc, char* argv[] ) {
 	//m_Monitor.img_out_last(img_out[150527]);
 	
 
-	m_Monitor.out_valid_conv0(out_valid_conv0);
-	m_Monitor.conv0_out_first(conv0_out[0]);
-	m_Monitor.conv0_out_last(conv0_out[193599]);
+	//m_Monitor.out_valid_conv0(out_valid_conv0);
+	//m_Monitor.conv0_out_first(conv0_out[0]);
+	//m_Monitor.conv0_out_last(conv0_out[193599]);
 	//m_Monitor.conv0_out_last(conv0_out[193598]);
 
 
-	m_Monitor.out_valid_max0(out_valid_max0);
-	m_Monitor.max0_out_first(max0_out[0]);
-	m_Monitor.max0_out_last(max0_out[46655]);
+	//m_Monitor.out_valid_max0(out_valid_max0);
+	//m_Monitor.max0_out_first(max0_out[0]);
+	//m_Monitor.max0_out_last(max0_out[46655]);
 	
 	
-	m_Monitor.out_valid_conv1(out_valid_conv1);
-	m_Monitor.conv1_out_first(conv1_out[0]);
-	m_Monitor.conv1_out_last(conv1_out[139967]);
+	//m_Monitor.out_valid_conv1(out_valid_conv1);
+	//m_Monitor.conv1_out_first(conv1_out[0]);
+	//m_Monitor.conv1_out_last(conv1_out[139967]);
 
-	m_Monitor.out_valid_max1(out_valid_max1);
-	m_Monitor.max1_out_first(max1_out[0]);
-	m_Monitor.max1_out_last(max1_out[32447]);
+	//m_Monitor.out_valid_max1(out_valid_max1);
+	//m_Monitor.max1_out_first(max1_out[0]);
+	//m_Monitor.max1_out_last(max1_out[32447]);
 	
-	m_Monitor.out_valid_conv2(out_valid_conv2);
-	m_Monitor.conv2_out_first(conv2_out[0]);
-	m_Monitor.conv2_out_last(conv2_out[64895]);
+	//m_Monitor.out_valid_conv2(out_valid_conv2);
+	//m_Monitor.conv2_out_first(conv2_out[0]);
+	//m_Monitor.conv2_out_last(conv2_out[64895]);
 	
-	m_Monitor.out_valid_conv3(out_valid_conv3);
-	m_Monitor.conv3_out_first(conv3_out[0]);
-	m_Monitor.conv3_out_last(conv3_out[43263]);
+	//m_Monitor.out_valid_conv3(out_valid_conv3);
+	//m_Monitor.conv3_out_first(conv3_out[0]);
+	//m_Monitor.conv3_out_last(conv3_out[43263]);
 	
-	m_Monitor.out_valid_conv4(out_valid_conv4);
-	m_Monitor.conv4_out_first(conv4_out[0]);
-	m_Monitor.conv4_out_last(conv4_out[43263]);
+	//m_Monitor.out_valid_conv4(out_valid_conv4);
+	//m_Monitor.conv4_out_first(conv4_out[0]);
+	//m_Monitor.conv4_out_last(conv4_out[43263]);
 	
-	m_Monitor.out_valid_max2(out_valid_max2);
-	m_Monitor.max2_out_first(max2_out[0]);
-	m_Monitor.max2_out_last(max2_out[9215]);
+	//m_Monitor.out_valid_max2(out_valid_max2);
+	//m_Monitor.max2_out_first(max2_out[0]);
+	//m_Monitor.max2_out_last(max2_out[9215]);
 	
-	m_Monitor.out_valid_linear0(out_valid_linear0);
-	m_Monitor.linear0_out_first(linear0_out[0]);
-	m_Monitor.linear0_out_last(linear0_out[4095]);
+	//m_Monitor.out_valid_linear0(out_valid_linear0);
+	//m_Monitor.linear0_out_first(linear0_out[0]);
+	//m_Monitor.linear0_out_last(linear0_out[4095]);
 	
-	m_Monitor.out_valid_linear1(out_valid_linear1);
-	m_Monitor.linear1_out_first(linear1_out[0]);
-	m_Monitor.linear1_out_last(linear1_out[4095]);
+	//m_Monitor.out_valid_linear1(out_valid_linear1);
+	//m_Monitor.linear1_out_first(linear1_out[0]);
+	//m_Monitor.linear1_out_last(linear1_out[4095]);
 	
 	m_Monitor.out_valid_linear2(out_valid_linear2);
 	m_Monitor.linear2_out(linear2_out);
@@ -202,7 +237,7 @@ int sc_main( int argc, char* argv[] ) {
 	//softmax_out.out_feature(softmax_out);
 
 	
-	sc_start( 180, SC_NS );
+	sc_start( 500, SC_NS );
 	return 0;
 
 }

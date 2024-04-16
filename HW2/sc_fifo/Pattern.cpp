@@ -29,7 +29,7 @@ void Pattern::run() {
 	C = rand() % 256; 
 	*/
 	else{
-		if(cycle<=1&&(rst.read() != 1)){
+		if(cycle==1&&(rst.read() != 1)){
 
 			//sc_vector<sc_out<sc_fixed_fast<46,17>>> img{"img",IMG_CHANNEL*IMG_WEIGHT*IMG_HEIGHT}
 			std::ifstream inputFile("data/dog.txt");

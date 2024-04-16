@@ -44,30 +44,30 @@ void Monitor:: run() {
 		//cout<<fixed<<setprecision(8)<<"in_valid_pat: \t\t"		<< in_valid_pat->read()		 << 
 		//		"\t||\timg_out[0]: \t\t"	<< double(img_out_first->read()) 		<< "\t\t\t||\timg_out[150527]: \t\t"	<<double(img_out_last->read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_conv0: \t"	<< out_valid_conv0	 << 
-				"\t||\tconv0_out[0]: \t\t"	<< double(conv0_out_first.read()) 	<< "\t\t\t||\tconv0_out[193599]: \t\t"	<<double(conv0_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv0: \t"	<< out_valid_conv0	 << 
+		//		"\t||\tconv0_out[0]: \t\t"	<< double(conv0_out_first.read()) 	<< "\t\t\t||\tconv0_out[193599]: \t\t"	<<double(conv0_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_max0: \t"	<< out_valid_max0	 << 
-				"\t||\tmax0_out[0]: \t\t"	<< double(max0_out_first.read()) 		<< "\t\t\t||\tmax0_out[46655]: \t\t"	<<double(max0_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_max0: \t"	<< out_valid_max0	 << 
+		//		"\t||\tmax0_out[0]: \t\t"	<< double(max0_out_first.read()) 		<< "\t\t\t||\tmax0_out[46655]: \t\t"	<<double(max0_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_conv1: \t"	<< out_valid_conv1	 << 
-				"\t||\tconv1_out[0]: \t\t"	<< double(conv1_out_first.read()) 	<< "\t\t\t||\tconv1_out[139967]: \t\t"	<<double(conv1_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_max1: \t"	<< out_valid_max1	 << 
-				"\t||\tmax1_out[0]: \t\t"	<< double(max1_out_first.read()) 		<< "\t\t\t||\tmax1_out[32447]: \t\t"	<<double(max1_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv1: \t"	<< out_valid_conv1	 << 
+		//		"\t||\tconv1_out[0]: \t\t"	<< double(conv1_out_first.read()) 	<< "\t\t\t||\tconv1_out[139967]: \t\t"	<<double(conv1_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_max1: \t"	<< out_valid_max1	 << 
+		//		"\t||\tmax1_out[0]: \t\t"	<< double(max1_out_first.read()) 		<< "\t\t\t||\tmax1_out[32447]: \t\t"	<<double(max1_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_conv2: \t"	<< out_valid_conv2	 << 
-				"\t||\tconv2_out[0]: \t\t"	<< double(conv2_out_first.read()) 	<< "\t\t\t||\tconv2_out[64895]: \t\t"	<<double(conv2_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_conv3: \t"	<< out_valid_conv3	 << 
-				"\t||\tconv3_out[0]: \t\t"	<< double(conv3_out_first.read()) 	<< "\t\t\t||\tconv3_out[43263]: \t\t"	<<double(conv3_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_conv4: \t"	<< out_valid_conv4	 << 
-				"\t||\tconv4_out[0]: \t\t"	<< double(conv4_out_first.read()) 	<< "\t\t\t||\tconv4_out[43263]: \t\t"	<<double(conv4_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_max2: \t"	<< out_valid_max2	 << 
-				"\t||\tmax2_out[0]: \t\t"	<< double(max2_out_first.read()) 		<< "\t\t\t||\tmax2_out[9215]: \t\t"		<<double(max2_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv2: \t"	<< out_valid_conv2	 << 
+		//		"\t||\tconv2_out[0]: \t\t"	<< double(conv2_out_first.read()) 	<< "\t\t\t||\tconv2_out[64895]: \t\t"	<<double(conv2_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv3: \t"	<< out_valid_conv3	 << 
+		//		"\t||\tconv3_out[0]: \t\t"	<< double(conv3_out_first.read()) 	<< "\t\t\t||\tconv3_out[43263]: \t\t"	<<double(conv3_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv4: \t"	<< out_valid_conv4	 << 
+		//		"\t||\tconv4_out[0]: \t\t"	<< double(conv4_out_first.read()) 	<< "\t\t\t||\tconv4_out[43263]: \t\t"	<<double(conv4_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_max2: \t"	<< out_valid_max2	 << 
+		//		"\t||\tmax2_out[0]: \t\t"	<< double(max2_out_first.read()) 		<< "\t\t\t||\tmax2_out[9215]: \t\t"		<<double(max2_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_linear0: \t"	<< out_valid_linear0 << 
-				"\t||\tlinear0_out[0]: \t"<< double(linear0_out_first.read()) 	<< "\t\t\t||\tlinear0_out[4095]: \t\t"	<<double(linear0_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_linear1: \t"	<< out_valid_linear1 << 
-				"\t||\tlinear1_out[0]: \t"<< double(linear1_out_first.read()) 	<< "\t\t\t||\tlinear1_out[4095]: \t\t"	<<double(linear1_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_linear0: \t"	<< out_valid_linear0 << 
+		//		"\t||\tlinear0_out[0]: \t"<< double(linear0_out_first.read()) 	<< "\t\t\t||\tlinear0_out[4095]: \t\t"	<<double(linear0_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_linear1: \t"	<< out_valid_linear1 << 
+		//		"\t||\tlinear1_out[0]: \t"<< double(linear1_out_first.read()) 	<< "\t\t\t||\tlinear1_out[4095]: \t\t"	<<double(linear1_out_last.read())<<endl;
 		cout<<fixed<<setprecision(8)<<"out_valid_linear2: \t"	<< out_valid_linear2 << 
 				"\t||\tlinear2_out[0]: \t"<< double(linear2_out[0].read()) 	<< "\t\t\t||\t1000[999]: \t\t\t"			<<double(linear2_out[999].read())<<endl;
 		
@@ -148,30 +148,30 @@ void Monitor:: run() {
 		//cout<<fixed<<setprecision(8)<<"in_valid_pat: \t\t"		<< in_valid_pat->read()		 << 
 		//		"\t||\timg_out[0]: \t\t"	<< double(img_out_first->read()) 		<< "\t\t\t||\timg_out[150527]: \t\t"	<<double(img_out_last->read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_conv0: \t"	<< out_valid_conv0	 << 
-				"\t||\tconv0_out[0]: \t\t"	<< double(conv0_out_first.read()) 	<< "\t\t\t||\tconv0_out[193599]: \t\t"	<<double(conv0_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv0: \t"	<< out_valid_conv0	 << 
+		//		"\t||\tconv0_out[0]: \t\t"	<< double(conv0_out_first.read()) 	<< "\t\t\t||\tconv0_out[193599]: \t\t"	<<double(conv0_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_max0: \t"	<< out_valid_max0	 << 
-				"\t||\tmax0_out[0]: \t\t"	<< double(max0_out_first.read()) 		<< "\t\t\t||\tmax0_out[46655]: \t\t"	<<double(max0_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_max0: \t"	<< out_valid_max0	 << 
+		//		"\t||\tmax0_out[0]: \t\t"	<< double(max0_out_first.read()) 		<< "\t\t\t||\tmax0_out[46655]: \t\t"	<<double(max0_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_conv1: \t"	<< out_valid_conv1	 << 
-				"\t||\tconv1_out[0]: \t\t"	<< double(conv1_out_first.read()) 	<< "\t\t\t||\tconv1_out[139967]: \t\t"	<<double(conv1_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_max1: \t"	<< out_valid_max1	 << 
-				"\t||\tmax1_out[0]: \t\t"	<< double(max1_out_first.read()) 		<< "\t\t\t||\tmax1_out[32447]: \t\t"	<<double(max1_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv1: \t"	<< out_valid_conv1	 << 
+		//		"\t||\tconv1_out[0]: \t\t"	<< double(conv1_out_first.read()) 	<< "\t\t\t||\tconv1_out[139967]: \t\t"	<<double(conv1_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_max1: \t"	<< out_valid_max1	 << 
+		//		"\t||\tmax1_out[0]: \t\t"	<< double(max1_out_first.read()) 		<< "\t\t\t||\tmax1_out[32447]: \t\t"	<<double(max1_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_conv2: \t"	<< out_valid_conv2	 << 
-				"\t||\tconv2_out[0]: \t\t"	<< double(conv2_out_first.read()) 	<< "\t\t\t||\tconv2_out[64895]: \t\t"	<<double(conv2_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_conv3: \t"	<< out_valid_conv3	 << 
-				"\t||\tconv3_out[0]: \t\t"	<< double(conv3_out_first.read()) 	<< "\t\t\t||\tconv3_out[43263]: \t\t"	<<double(conv3_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_conv4: \t"	<< out_valid_conv4	 << 
-				"\t||\tconv4_out[0]: \t\t"	<< double(conv4_out_first.read()) 	<< "\t\t\t||\tconv4_out[43263]: \t\t"	<<double(conv4_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_max2: \t"	<< out_valid_max2	 << 
-				"\t||\tmax2_out[0]: \t\t"	<< double(max2_out_first.read()) 		<< "\t\t\t||\tmax2_out[9215]: \t\t"		<<double(max2_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv2: \t"	<< out_valid_conv2	 << 
+		//		"\t||\tconv2_out[0]: \t\t"	<< double(conv2_out_first.read()) 	<< "\t\t\t||\tconv2_out[64895]: \t\t"	<<double(conv2_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv3: \t"	<< out_valid_conv3	 << 
+		//		"\t||\tconv3_out[0]: \t\t"	<< double(conv3_out_first.read()) 	<< "\t\t\t||\tconv3_out[43263]: \t\t"	<<double(conv3_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_conv4: \t"	<< out_valid_conv4	 << 
+		//		"\t||\tconv4_out[0]: \t\t"	<< double(conv4_out_first.read()) 	<< "\t\t\t||\tconv4_out[43263]: \t\t"	<<double(conv4_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_max2: \t"	<< out_valid_max2	 << 
+		//		"\t||\tmax2_out[0]: \t\t"	<< double(max2_out_first.read()) 		<< "\t\t\t||\tmax2_out[9215]: \t\t"		<<double(max2_out_last.read())<<endl;
 		
-		cout<<fixed<<setprecision(8)<<"out_valid_linear0: \t"	<< out_valid_linear0 << 
-				"\t||\tlinear0_out[0]: \t"<< double(linear0_out_first.read()) 	<< "\t\t\t||\tlinear0_out[4095]: \t\t"	<<double(linear0_out_last.read())<<endl;
-		cout<<fixed<<setprecision(8)<<"out_valid_linear1: \t"	<< out_valid_linear1 << 
-				"\t||\tlinear1_out[0]: \t"<< double(linear1_out_first.read()) 	<< "\t\t\t||\tlinear1_out[4095]: \t\t"	<<double(linear1_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_linear0: \t"	<< out_valid_linear0 << 
+		//		"\t||\tlinear0_out[0]: \t"<< double(linear0_out_first.read()) 	<< "\t\t\t||\tlinear0_out[4095]: \t\t"	<<double(linear0_out_last.read())<<endl;
+		//cout<<fixed<<setprecision(8)<<"out_valid_linear1: \t"	<< out_valid_linear1 << 
+		//		"\t||\tlinear1_out[0]: \t"<< double(linear1_out_first.read()) 	<< "\t\t\t||\tlinear1_out[4095]: \t\t"	<<double(linear1_out_last.read())<<endl;
 		cout<<fixed<<setprecision(8)<<"out_valid_linear2: \t"	<< out_valid_linear2 << 
 				"\t||\tlinear2_out[0]: \t"<< double(linear2_out[0].read()) 	<< "\t\t\t||\t1000[999]: \t\t\t"			<<double(linear2_out[999].read())<<endl;
 		cout<<"=============================================================================================="<<endl;
