@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.synopsys.vp.base.vpcfg.core:VPProject activeBuild="Debug" activeConfig="Default" activeExportDirectory="" configSearchPath="" configsSearchPathSecondary="" description="" platformHome="" platformName="MAC" simWorkingDir="" xmi:version="2.0" xmlns:com.synopsys.vp.base.vpcfg.core="com.synopsys.vp.base.vpcfg.core.vpprj" xmlns:xmi="http://www.omg.org/XMI">
+   <builds name="Debug" simExtraArgs="" simPath="Debug/sim"/>
+</com.synopsys.vp.base.vpcfg.core:VPProject>

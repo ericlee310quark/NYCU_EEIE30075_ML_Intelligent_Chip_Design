@@ -1,0 +1,34 @@
+# Items are separated by comma; One line for each data item.
+#<monitor name>,<monitor type>,<object name>,<visible>,<data item name>,<data item kind>,<resource>,<resource ID),<viewer>,<viewer args>,<signature>
+Value Trace,Value Trace,HARDWARE.i_router.clk,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.clk,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3dede622829d8ce1c628a394533bf164f4f1aa125
+Value Trace,Value Trace,HARDWARE.i_router.rst,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.rst,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3ddfbb530ae01575f30607f238b578f2e09605ee8
+Value Trace,Value Trace,HARDWARE.i_router.out_flit_L,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_flit_L,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda32c0b915aee3720d6b76384531043749154ec575e
+Value Trace,Value Trace,HARDWARE.i_router.out_flit_R,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_flit_R,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda34a711d562c6b6f00b1760efba6283a303b51e040
+Value Trace,Value Trace,HARDWARE.i_router.out_flit_U,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_flit_U,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3c1432fc911076879ae449b6fbbff1b5cc916a0a2
+Value Trace,Value Trace,HARDWARE.i_router.out_flit_B,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_flit_B,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3b9c2e6062c4179d5a2e38f698350b245fa61670a
+Value Trace,Value Trace,HARDWARE.i_router.out_flit_C,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_flit_C,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda315805f38a0ad230da66ce3fb9756862663b94b6b
+Value Trace,Value Trace,HARDWARE.i_router.out_req_L,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_req_L,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3265426ac59755c3e23cd59640520abba4d166863
+Value Trace,Value Trace,HARDWARE.i_router.out_req_R,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_req_R,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3a3236ef84c37420149c8678523714bf4253d5b95
+Value Trace,Value Trace,HARDWARE.i_router.out_req_U,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_req_U,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda377cc754b7c327db6dcecf5788c57f4bdb409d9f3
+Value Trace,Value Trace,HARDWARE.i_router.out_req_B,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_req_B,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3885d3d56607905ae05fd5041dfae621754712b07
+Value Trace,Value Trace,HARDWARE.i_router.out_req_C,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_req_C,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3a3cc7e3c1538345be520e31d095c3198ebfc6d75
+Value Trace,Value Trace,HARDWARE.i_router.in_ack_L,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_ack_L,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda36d74d9dc4ccca61f73df8538059e46de4e3adebf
+Value Trace,Value Trace,HARDWARE.i_router.in_ack_R,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_ack_R,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3a9b0ff44ac1ab26eb75c5b71f6e25469162eb0e0
+Value Trace,Value Trace,HARDWARE.i_router.in_ack_U,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_ack_U,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3e0f32ea1e491c06a35d8de294bc1887254b61cc2
+Value Trace,Value Trace,HARDWARE.i_router.in_ack_B,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_ack_B,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda381e59c5975e60ed50be01fd4d00d879f4aa42ec2
+Value Trace,Value Trace,HARDWARE.i_router.in_ack_C,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_ack_C,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3583e982c5a14a51c141c8119bdb9af015de0bb53
+Value Trace,Value Trace,HARDWARE.i_router.in_flit_L,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_flit_L,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda385e2e2997c002ae6ddd5e1218002077a802bae99
+Value Trace,Value Trace,HARDWARE.i_router.in_flit_R,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_flit_R,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3b1c09fd59943d7f4c67d4d125a268df6cbc275ac
+Value Trace,Value Trace,HARDWARE.i_router.in_flit_U,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_flit_U,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda38db9a511b1334657a89f44ec88f4c0e76fd85760
+Value Trace,Value Trace,HARDWARE.i_router.in_flit_B,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_flit_B,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3af9384993453fdb7e61c4d30a257bf6c8fbb75a5
+Value Trace,Value Trace,HARDWARE.i_router.in_flit_C,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_flit_C,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3618343f2bb5bb3e394eb6748f34a66d8e722d4ef
+Value Trace,Value Trace,HARDWARE.i_router.in_req_L,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_req_L,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3db28f364a05463feacc715352baa01fc2122258d
+Value Trace,Value Trace,HARDWARE.i_router.in_req_R,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_req_R,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3d266bb9cdd96022e3ff1cb474e3c6f371d4a6439
+Value Trace,Value Trace,HARDWARE.i_router.in_req_U,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_req_U,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda32da88bd882556cf0c84d2ed83037f0af69db1d8a
+Value Trace,Value Trace,HARDWARE.i_router.in_req_B,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_req_B,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3fb19a26fedff400038e7b90790af1355875eeab0
+Value Trace,Value Trace,HARDWARE.i_router.in_req_C,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.in_req_C,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3a7a1ed536456a8fef4ffb1798d4fe7fbe5fde8d4
+Value Trace,Value Trace,HARDWARE.i_router.out_ack_L,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_ack_L,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda33f2fdccd08e5723975a00a917e2a7673d8d79e62
+Value Trace,Value Trace,HARDWARE.i_router.out_ack_R,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_ack_R,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda314e37e4121034671b600f3721a228224693ea346
+Value Trace,Value Trace,HARDWARE.i_router.out_ack_U,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_ack_U,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3f04d7b9d753ac2b9002fb497d022f436659c7136
+Value Trace,Value Trace,HARDWARE.i_router.out_ack_B,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_ack_B,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3da39c0b31b447a320bb26d7e1dc75dc38cdf2188
+Value Trace,Value Trace,HARDWARE.i_router.out_ack_C,true,,sc_trace,scadb.cwrdb,HARDWARE.i_router.out_ack_C,Waveform,,e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3fc942fd7f7307af67a2fa12a24d0c3edc712345e

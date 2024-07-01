@@ -1,0 +1,13 @@
+## -*- Makefile macro include -*- for sim.
+## Runs with GNU make.
+##
+
+SUB_USER_PP_FLAGS =  -I.
+SUB_USER_C_FLAGS = 
+SUB_USER_LD_FLAGS = 
+SUB_USER_AR_FLAGS = 
+CWR_COSIM_LDFLAGS = -ucwrGlobalFunctions -umain -lcwrCosim -lcwrCosimApi
+
+## end Makefile for sim
+
+## end Makefile for sim

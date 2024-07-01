@@ -1,0 +1,1 @@
+vpa::start_simulation Debug/sim {/RAID2/COURSE/mlchip/mlchip007/FP/export} {--cwr_wait --cwr_properties_xml Properties.xml} 120

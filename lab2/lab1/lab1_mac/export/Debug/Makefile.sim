@@ -1,0 +1,237 @@
+## -*- Makefile -*- for sim.
+## Runs with GNU make.
+##
+
+export COWARE_CXX_COMPILER = gcc-6.2.0-64
+
+## Include ConvergenSC build preamble
+include $(COWAREHOME)/tools/etc/build.preamble
+
+## Program name for simulation
+PROGRAM = sim
+## Program name for elaboration
+PROGRAM_ELAB = $(PROGRAM)-elab
+## Library name for simulation
+LIBRARY = lib$(PROGRAM).a
+## Shared Library name for simulator
+SHARED_LIBRARY = $(PROGRAM).so
+
+## Shared Library name for component
+SHARED_LIBRARY_COMP = lib$(PROGRAM).so
+
+## Configuration directory
+CONFIG = Debug
+CSCDIR = Debug/ConvergenSC
+SRCDIR = /RAID2/COURSE/mlchip/mlchip007/lab2/lab1/lab1_mac/export
+
+SCC_OPT_LEVEL =  +O1
+VERBOSE=
+SCCFLAGS=
+SCSIM_OPTS=
+
+## Default arguments for ConvergenSC tools
+ifdef SNPS_VP_CXX_PREFIX
+$(warning using SNPS_VP_CXX_PREFIX)
+endif
+SCC_CMD=scc +cxx $(CXX) $(VERBOSE)
+SCC=$(SCC_CMD) $(SCCFLAGS) $(SCC_OPT_LEVEL)
+SCSIM=scsim +config $(CONFIG) $(VERBOSE) $(SCSIM_OPTS)
+SCC_LINK=scc +cxx "  $(CXX)  " $(VERBOSE) $(SCCFLAGS)
+
+## Elaboration time arguments for sc_main
+CWR_ELAB_ARGS =
+
+SOURCES=\
+	$(CSCDIR)/cwr_simulation_vars.cpp\
+	../Monitor.cpp\
+	../Pattern.cpp\
+	../clockreset.cpp\
+	HARDWARE.cpp
+
+CWR_SV_OBJECTS=\
+	$(CSCDIR)/cwr_simulation_vars.o
+
+OBJECTS=\
+	$(CONFIG)/__up1__/Monitor.o\
+	$(CONFIG)/__up1__/Pattern.o\
+	$(CONFIG)/__up1__/clockreset.o\
+	$(CONFIG)/HARDWARE.o
+
+DEPENDS=\
+	$(CSCDIR)/cwr_simulation_vars.d\
+	$(CONFIG)/__up1__/Monitor.d\
+	$(CONFIG)/__up1__/Pattern.d\
+	$(CONFIG)/__up1__/clockreset.d\
+	$(CONFIG)/HARDWARE.d
+
+PCHS=\
+	../.*.pch\
+	./.*.pch
+
+IP_EXTRA_DEPS =
+
+## Extra unit generated for static schedule
+CWR_SC_SOURCE=$(CSCDIR)/$(CWR_SC_UNIT)
+CWR_SC_OBJECT=$(CWR_SC_SOURCE:.cpp=.o)
+
+## Preprocessor, compiler and linker options
+CXXFLAGS = $(CWR_SYSTEMC_CXXFLAGS) -g2   
+USER_PP_FLAGS = -I"."
+USER_C_FLAGS = -fPIC
+USER_LD_FLAGS = 
+USER_AR_FLAGS = 
+
+include $(CONFIG)/Makefile.sim.macro_include
+
+ALL_PP_FLAGS =  $(USER_PP_FLAGS) $(SUB_USER_PP_FLAGS)
+ALL_C_FLAGS = $(USER_C_FLAGS) $(SUB_USER_C_FLAGS)
+ALL_LD_FLAGS = $(USER_LD_FLAGS) $(SUB_USER_LD_FLAGS)
+ALL_AR_FLAGS = $(USER_AR_FLAGS) $(SUB_USER_AR_FLAGS)
+ALL_SOURCES = $(SOURCES) $(SUB_SOURCES)
+ALL_OBJECTS = $(OBJECTS) $(SUB_OBJECTS)
+ALL_DEPENDS = $(DEPENDS) $(SUB_DEPENDS)
+
+build: $(CONFIG)/$(PROGRAM_ELAB)
+
+library: $(CONFIG)/$(LIBRARY)
+
+$(CONFIG)/$(LIBRARY): $(ALL_OBJECTS) Debug/ar.cinfo
+	$(AR) $(SNPS_VP_ARFLAGS) $(ALL_AR_FLAGS) $@ $(ALL_OBJECTS)
+
+elab: $(CWR_SC_SOURCE)
+
+$(CWR_SC_SOURCE): $(CONFIG)/$(PROGRAM_ELAB)
+	$(SCSIM) +elab +o $(CWR_SC_UNIT) $(PROGRAM) $(CWR_ELAB_ARGS)
+
+final_elab: elab
+
+$(CONFIG)/$(PROGRAM_ELAB): $(CWR_SV_OBJECTS) $(ALL_OBJECTS)  Debug/ld.cinfo $(IP_EXTRA_DEPS)
+	@rm -f $(CONFIG)/$(PROGRAM)
+	@rm -f $(CONFIG)/$(SHARED_LIBRARY)
+	@rm -f $(CONFIG)/$(SHARED_LIBRARY_COMP)
+	$(SCC_LINK) -o $@ $(CWR_SV_OBJECTS) $(ALL_OBJECTS) $(ALL_LD_FLAGS) $(CWR_COSIM_LDFLAGS) $(COWARE_ANALYSIS_LINK)
+
+program: $(CONFIG)/$(PROGRAM)
+
+all: program
+
+copy_to_program: $(CONFIG)/$(PROGRAM_ELAB)
+	@/bin/cp -f $(CONFIG)/$(PROGRAM_ELAB) $(CONFIG)/$(PROGRAM)
+
+sharedLibrary: $(CONFIG)/$(SHARED_LIBRARY)
+
+sharedLibraryComp: $(CONFIG)/$(SHARED_LIBRARY_COMP)
+
+$(CONFIG)/$(PROGRAM): $(CWR_SC_OBJECT) $(CWR_SV_OBJECTS) $(ALL_OBJECTS)  Debug/ld.cinfo $(IP_EXTRA_DEPS)
+	$(SCC_LINK) -o $@ +O3 $< $(CWR_SV_OBJECTS) $(ALL_OBJECTS) $(ALL_LD_FLAGS) $(COWARE_ANALYSIS_LINK) 
+
+$(CONFIG)/$(SHARED_LIBRARY): $(CWR_SC_OBJECT) $(CWR_SV_OBJECTS) $(ALL_OBJECTS)  Debug/ld.cinfo $(IP_EXTRA_DEPS)
+	CWR_COSIM_SHARED_LIBRARY=1; export CWR_COSIM_SHARED_LIBRARY; $(SCC_LINK) -o $@ -shared +O3 $< $(CWR_SV_OBJECTS) $(ALL_OBJECTS) $(ALL_LD_FLAGS) $(CWR_COSIM_LDFLAGS) $(COWARE_ANALYSIS_LINK) 
+
+$(CONFIG)/$(SHARED_LIBRARY_COMP): $(ALL_OBJECTS)  Debug/ld.cinfo $(IP_EXTRA_DEPS)
+	$(CXX) -o $@ -shared -O3 $(ALL_OBJECTS) $(ALL_LD_FLAGS) $(CWR_COMP_LDFLAGS)
+
+gen_pch: $(CONFIG)/cwr_systemc.h.gch
+
+$(CONFIG)/cwr_systemc.h.gch: $(CONFIG)/cwr_systemc.h Debug/cwr_systemc.h.cinfo
+	$(SCC_CMD) +gen-pch $(CXXFLAGS) $(ALL_C_FLAGS) $(ALL_PP_FLAGS) -c $< -o $@ -MMD -MP
+
+$(CONFIG)/cwr_systemc.h: $(COWAREHOME)/common/include/systemc.h
+	/bin/cp -f $< $@
+
+$(CONFIG)/__up1__/Pattern.o: ../Pattern.cpp Debug/__up1__/Pattern.cinfo
+	$(SCC) $(CXXFLAGS) $(ALL_C_FLAGS) $(ALL_PP_FLAGS) -c "../Pattern.cpp" -o "$(CONFIG)/__up1__/Pattern.o"
+
+$(CONFIG)/__up1__/Pattern.d: Debug/__up1__/Pattern.cinfo
+	@$(CPP) -MM -MP $(ALL_PP_FLAGS) $(CXXFLAGS) $(CWR_SYSTEMC_INCLUDE)  $(ALL_C_FLAGS)  "../Pattern.cpp" -MT "$(CONFIG)/__up1__/Pattern.o" -MT "$(CONFIG)/__up1__/Pattern.d" -MF "$@" && [ -s "$@" ] || rm -f "$@"
+
+$(CONFIG)/__up1__/clockreset.o: ../clockreset.cpp Debug/__up1__/clockreset.cinfo
+	$(SCC) $(CXXFLAGS) $(ALL_C_FLAGS) $(ALL_PP_FLAGS) -c "../clockreset.cpp" -o "$(CONFIG)/__up1__/clockreset.o"
+
+$(CONFIG)/__up1__/clockreset.d: Debug/__up1__/clockreset.cinfo
+	@$(CPP) -MM -MP $(ALL_PP_FLAGS) $(CXXFLAGS) $(CWR_SYSTEMC_INCLUDE)  $(ALL_C_FLAGS)  "../clockreset.cpp" -MT "$(CONFIG)/__up1__/clockreset.o" -MT "$(CONFIG)/__up1__/clockreset.d" -MF "$@" && [ -s "$@" ] || rm -f "$@"
+
+$(CONFIG)/__up1__/Monitor.o: ../Monitor.cpp Debug/__up1__/Monitor.cinfo
+	$(SCC) $(CXXFLAGS) $(ALL_C_FLAGS) $(ALL_PP_FLAGS) -c "../Monitor.cpp" -o "$(CONFIG)/__up1__/Monitor.o"
+
+$(CONFIG)/__up1__/Monitor.d: Debug/__up1__/Monitor.cinfo
+	@$(CPP) -MM -MP $(ALL_PP_FLAGS) $(CXXFLAGS) $(CWR_SYSTEMC_INCLUDE)  $(ALL_C_FLAGS)  "../Monitor.cpp" -MT "$(CONFIG)/__up1__/Monitor.o" -MT "$(CONFIG)/__up1__/Monitor.d" -MF "$@" && [ -s "$@" ] || rm -f "$@"
+
+$(CONFIG)/HARDWARE.o: HARDWARE.cpp Debug/HARDWARE.cinfo
+	$(SCC) $(CXXFLAGS) $(ALL_C_FLAGS) $(ALL_PP_FLAGS) -c "HARDWARE.cpp" -o "$(CONFIG)/HARDWARE.o"
+
+$(CONFIG)/HARDWARE.d: Debug/HARDWARE.cinfo
+	@$(CPP) -MM -MP $(ALL_PP_FLAGS) $(CXXFLAGS) $(CWR_SYSTEMC_INCLUDE)  $(ALL_C_FLAGS)  "HARDWARE.cpp" -MT "$(CONFIG)/HARDWARE.o" -MT "$(CONFIG)/HARDWARE.d" -MF "$@" && [ -s "$@" ] || rm -f "$@"
+
+
+$(CSCDIR)/cwr_simulation_vars.o: $(CSCDIR)/cwr_simulation_vars.cpp Debug/ConvergenSC/cwr_simulation_vars.cinfo
+	$(CXX) $(CXXFLAGS) $(ALL_C_FLAGS) $(ALL_PP_FLAGS) -c $(CSCDIR)/cwr_simulation_vars.cpp -o $(CSCDIR)/cwr_simulation_vars.o
+
+$(CSCDIR)/cwr_simulation_vars.d: $(CSCDIR)/cwr_simulation_vars.cpp
+	@$(CPP) -MM -MP   "$<" -MT "$(CSCDIR)/cwr_simulation_vars.o" -MT "$(CSCDIR)/cwr_simulation_vars.d" -MF "$@" && [ -s "$@" ] || rm -f "$@"
+
+
+$(CWR_SC_OBJECT): $(CWR_SC_SOURCE) Debug/ConvergenSC/cwr_simulate.cinfo
+	$(SCC) $(CXXFLAGS) -o $@ -c -O2 -fPIC +O3 $<
+
+$(CONFIG):
+	test -d $(CONFIG) || mkdir -p $(CONFIG)
+
+clean: clean_exec clean_pch
+	@rm -f $(CONFIG)/*.o  $(CONFIG)/*.d
+	@rm -f $(CSCDIR)/*.o  $(CSCDIR)/*.d
+	@rm -f $(CWR_SV_OBJECTS) $(ALL_OBJECTS) $(ALL_DEPENDS) 
+
+clean_exec: clean_elab_program clean_program
+
+clean_elab_program:
+	@rm -f $(CONFIG)/$(PROGRAM_ELAB)
+
+clean_program:
+	@rm -f $(CONFIG)/$(PROGRAM)
+
+clean_scheduler:
+	@rm -f $(CSCDIR)/cwr_simulate.cpp $(CSCDIR)/cwr_simulate.o
+
+clean_cosim: clean_scheduler clean_program
+	@rm -rf $(CSCDIR)/cosim
+	@rm -f $(CONFIG)/$(SHARED_LIBRARY)
+
+clean_pch: 
+	@rm -f $(PCHS)
+
+clean_library:
+	@rm -f $(CONFIG)/$(LIBRARY)
+
+ppflags: $(CONFIG)/cwr_empty.cpp
+	@echo CXXSPEC_START
+	@$(CXX) -E -P -v $< 2>&1
+	@echo CXXSPEC_END
+	@echo PPFLAGS=$(CWR_SYSTEMC_INCLUDE) $(ALL_PP_FLAGS)
+	@rm -f $<
+
+$(CONFIG)/cwr_empty.cpp:
+	@touch $@
+
+include $(CONFIG)/Makefile.sim.obj_include
+
+-include $(ALL_DEPENDS)
+
+$(CONFIG)/$(PROGRAM) $(CONFIG)/$(PROGRAM_ELAB) $(OBJECTS): $(wildcard logicalnames.inc)
+
+ifneq ($(SNPS_VP_USER_MAKEFILE), "")
+include $(SNPS_VP_USER_MAKEFILE)
+endif
+
+
+dumpvars: $(IP_EXTRA_DEPS) 
+	@echo __sTArt_BuiLDVarDumP__
+	@echo SOURCES:
+	@echo $(SOURCES)
+	@echo BUILD_FLAGS:
+	@echo $(CWR_SYSTEMC_INCLUDE) $(CXXFLAGS) $(ALL_C_FLAGS) $(ALL_PP_FLAGS)
+	@echo LINK_FLAGS:
+	@echo $(ALL_LD_FLAGS) $(CWR_SCO2_LDFLAGS) $(CWR_COSIM_LDFLAGS) $(COWARE_ANALYSIS_LINK)
+	@echo __eND_BuiLDVarDumP__
+
+## end Makefile for sim

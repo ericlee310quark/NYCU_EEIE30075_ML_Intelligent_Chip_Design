@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.synopsys.vp.base:NodeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.synopsys.vp.base="com.synopsys.vp.base.anlycfg" name="i_router" kind="MODULE">
+<children name="@myself" kind="GENERATEDOBJ">
+<children name="clk" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_ack_B" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_ack_C" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_ack_L" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_ack_R" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_ack_U" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_flit_B" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_flit_C" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_flit_L" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_flit_R" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_flit_U" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_req_B" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_req_C" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_req_L" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_req_R" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="in_req_U" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_ack_B" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_ack_C" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_ack_L" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_ack_R" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_ack_U" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_flit_B" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_flit_C" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_flit_L" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_flit_R" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_flit_U" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_req_B" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_req_C" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_req_L" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_req_R" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="out_req_U" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="rst" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<configInfo kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+</com.synopsys.vp.base:NodeInfo>

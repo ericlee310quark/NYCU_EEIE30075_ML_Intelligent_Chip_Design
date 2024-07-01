@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.synopsys.vp.base:NodeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.synopsys.vp.base="com.synopsys.vp.base.anlycfg" name="SCProfiler" kind="MODULE">
+<configInfo kind="MiscTrace" factoryName="Simulation Hotspots" category="Simulation Profiling"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="Profiling Events" category="Simulation Profiling"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="Processor Model Event" category="Simulation Profiling"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="Memory Consumption" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Simulation Hotspots" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Profiling Events" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Processor Model Event" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Memory Consumption" category="Simulation Profiling"  configurable="true"/>
+</com.synopsys.vp.base:NodeInfo>

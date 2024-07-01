@@ -1,0 +1,179 @@
+wvResizeWindow -win $_nWave1 0 23 1707 889
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvOpenFile -win $_nWave1 {/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/SystemC"
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/SystemC/clk} \
+{/SystemC/data} -color ID_RED5 \
+{/SystemC/data_valid} \
+{/SystemC/layer_id\[31:0\]} \
+{/SystemC/layer_id_type} \
+{/SystemC/layer_id_valid} \
+{/SystemC/rst} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 2 3 4 5 6 7 )} 
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 7 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 7 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSetCursor -win $_nWave1 4553660.949868 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 4397097.625330 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 2544986.807388 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 59960.422164 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 53298.153034 -snap {("G2" 0)}
+wvSetCursor -win $_nWave1 29980.211082 -snap {("G1" 6)}
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvExpandBus -win $_nWave1 {("G1" 4)}
+wvSetPosition -win $_nWave1 {("G1" 39)}
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvCollapseBus -win $_nWave1 {("G1" 4)}
+wvSetPosition -win $_nWave1 {("G1" 4)}
+wvSetPosition -win $_nWave1 {("G1" 7)}
+wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvReloadFile -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 131246.701847 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 213192.612137 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 262493.403694 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 340441.952507 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 403067.282322 -snap {("G1" 2)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvReloadFile -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvResizeWindow -win $_nWave1 0 23 1707 889
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvConvertFile -win $_nWave1 -o "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd.fsdb" \
+           "/RAID2/COURSE/mlchip/mlchip007/hw4/wave.vcd"
+wvReloadFile -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
+wvExit

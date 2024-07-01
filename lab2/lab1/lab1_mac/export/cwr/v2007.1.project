@@ -1,0 +1,117 @@
+<registry>
+<table n="Debug" b="cwr">
+  <d n="__isa__"             >config_t</d>
+  <d n="active_config"       >true</d>
+  <m n="pct_build_config"    >pct_build_config.0</m>
+  <l n="pct_include_files"   >pct_include_files.0</l>
+  <l n="pct_ip_scripts"      >pct_ip_scripts.0</l>
+  <m n="pct_lib_config_Debug">pct_lib_config_Debug.0</m>
+  <l n="pct_library_configs" >pct_library_configs.0</l>
+  <d n="pct_linker_flags"    ></d>
+  <d n="pct_main_args"       >--cwr_properties_xml Properties.xml</d>
+  <d n="pct_project_file"    >/RAID2/COURSE/mlchip/mlchip007/lab2/lab1/lab1_mac/MAC.xml</d>
+  <l n="pct_source_files"    >pct_source_files.0</l>
+</table>
+<table n="Debug.Build" b="Debug">
+  <d n="enable-inno-runtime"  >false</d>
+  <d n="encapsulated-netlist" >true</d>
+  <d n="export_type"          >DYNAMIC NETLIST</d>
+  <d n="library_configuration">Debug</d>
+  <d n="main_configuration"   ></d>
+</table>
+<table n="Debug.Build.buildInfo.A" b="Debug.Build">
+  <d n="__isa__"       >build_info_t</d>
+  <d n="generic-loader">false</d>
+  <l n="ip_scripts"    >ip_scripts.0</l>
+  <d n="ld_flags"      > </d>
+  <l n="pp_dirs"       >pp_dirs.0</l>
+  <l n="sources"       >sources.0</l>
+</table>
+<table n="Debug.Launch" b="Debug"/>
+<table n="Debug.Run.runInfo" b="Debug.Launch">
+  <d n="__isa__"      >run_info_t</d>
+  <d n="args"         > --cwr_properties_xml Properties.xml</d>
+  <d n="maf"          >mem_map</d>
+  <m n="vlog_compopts">vlog_compopts.0</m>
+</table>
+<table n="cwr">
+  <d n="CurrentConfig">Debug</d>
+</table>
+<table n="ip_scripts.0">
+  <d n="aaaa">cwr/logicalnames.tcl</d>
+  <d n="aaab">cwr/pct_build_callback.tcl</d>
+</table>
+<table n="pct_build_config.0">
+  <d n="Adder/Adder"          >FromSource</d>
+  <d n="Clock/Clock"          >FromSource</d>
+  <d n="MAC/MAC"              >FromSource</d>
+  <d n="Monitor/Monitor"      >FromSource</d>
+  <d n="Multiplier/Multiplier">FromSource</d>
+  <d n="Pattern/Pattern"      >FromSource</d>
+  <d n="Reset/Reset"          >FromSource</d>
+</table>
+<table n="pct_include_files.0">
+  <d n="aaaa">.</d>
+</table>
+<table n="pct_ip_scripts.0">
+  <d n="aaaa">cwr/logicalnames.tcl</d>
+  <d n="aaab">cwr/pct_build_callback.tcl</d>
+</table>
+<table n="pct_lib_config_Debug.0">
+  <d n="AMBA5_PL"                  >BuildFromSource</d>
+  <d n="AMBA_PL"                   >BuildFromSource</d>
+  <d n="AMBA_TLM2_BL"              >BuildFromSource</d>
+  <d n="AMBA_TLM2_LT_PL"           >BuildFromSource</d>
+  <d n="ARTERIS_PL"                >BuildFromSource</d>
+  <d n="AXI_PL"                    >BuildFromSource</d>
+  <d n="CCSS_API_PL"               >BuildFromSource</d>
+  <d n="ExampleCache"              >BuildFromSource</d>
+  <d n="ExampleDMA"                >BuildFromSource</d>
+  <d n="ExampleInterruptController">BuildFromSource</d>
+  <d n="ExampleMemory"             >BuildFromSource</d>
+  <d n="ExampleTimer"              >BuildFromSource</d>
+  <d n="FIFO_PL"                   >BuildFromSource</d>
+  <d n="GENERIC_PL"                >BuildFromSource</d>
+  <d n="GENERIC_TLM2"              >BuildFromSource</d>
+  <d n="MCO"                       >BuildFromSource</d>
+  <d n="MCOPower"                  >BuildFromSource</d>
+  <d n="MemoryCheck"               >BuildFromSource</d>
+  <d n="MultiSimCANLib"            >BuildFromSource</d>
+  <d n="MultiSimLib"               >BuildFromSource</d>
+  <d n="PAMTraining"               >BuildFromSource</d>
+  <d n="PDMTraining"               >BuildFromSource</d>
+  <d n="PV_BL"                     >BuildFromSource</d>
+  <d n="PowerModeling"             >BuildFromSource</d>
+  <d n="SCML_BL"                   >BuildFromSource</d>
+  <d n="SCML_TM_PL"                >BuildFromSource</d>
+  <d n="TLM2ModelingExamples"      >BuildFromSource</d>
+  <d n="TLM2_PL"                   >BuildFromSource</d>
+  <d n="TLM2_PROTOCOLS"            >BuildFromSource</d>
+  <d n="TclInitiator"              >BuildFromSource</d>
+  <d n="UPFTraining"               >BuildFromSource</d>
+  <d n="UvmcConnectors"            >BuildFromSource</d>
+  <d n="VSI_CONNECTOR_BLOCKS"      >BuildFromSource</d>
+  <d n="WDOG"                      >BuildFromSource</d>
+</table>
+<table n="pct_library_configs.0">
+  <d n="aaaa">Debug</d>
+</table>
+<table n="pct_source_files.0">
+  <d n="aaaa">../Monitor.cpp</d>
+  <d n="aaab">../Pattern.cpp</d>
+  <d n="aaac">../clockreset.cpp</d>
+  <d n="aaad">HARDWARE.cpp</d>
+</table>
+<table n="pp_dirs.0">
+  <d n="aaaa">.</d>
+</table>
+<table n="sources.0">
+  <d n="aaaa">../Monitor.cpp</d>
+  <d n="aaab">../Pattern.cpp</d>
+  <d n="aaac">../clockreset.cpp</d>
+  <d n="aaad">HARDWARE.cpp</d>
+</table>
+<table n="vlog_compopts.0">
+  <d n=""> </d>
+</table>
+</registry>

@@ -1,0 +1,5 @@
+#!/bin/bash
+MYPWD=`pwd`; cd `dirname $0`; DIR=`pwd`; cd ${MYPWD}
+CWR_VP_LOCATION=${DIR}
+export LD_LIBRARY_PATH; export CWR_VP_LOCATION
+${DIR}/sim ${1:+"$@"}

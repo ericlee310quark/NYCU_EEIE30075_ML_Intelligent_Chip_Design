@@ -1,0 +1,722 @@
+hdl_simulator = vcs
+
+hdl_proxy_name = HARDWARE.i_router
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 0
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_1
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 1
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_2
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 2
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_3
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 3
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 4
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_1
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 5
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_3
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 6
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_4
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 7
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_5
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 8
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_6
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 9
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_7
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 10
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_8
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 11
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_9
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 12
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_10
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 13
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_11
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 14
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG
+hdl_proxy_name = HARDWARE.i_router_4_12
+hdl_module_name = router
+hdl_library_name = CWR_HDL_WORK
+map_ports_by = index
+ports = (
+  clk : in bool 1
+  rst : in bool 1
+  out_flit_L : out sc_lv 34
+  out_flit_R : out sc_lv 34
+  out_flit_U : out sc_lv 34
+  out_flit_B : out sc_lv 34
+  out_flit_C : out sc_lv 34
+  out_req_L : out bool 1
+  out_req_R : out bool 1
+  out_req_U : out bool 1
+  out_req_B : out bool 1
+  out_req_C : out bool 1
+  in_ack_L : in bool 1
+  in_ack_R : in bool 1
+  in_ack_U : in bool 1
+  in_ack_B : in bool 1
+  in_ack_C : in bool 1
+  in_flit_L : in sc_lv 34
+  in_flit_R : in sc_lv 34
+  in_flit_U : in sc_lv 34
+  in_flit_B : in sc_lv 34
+  in_flit_C : in sc_lv 34
+  in_req_L : in bool 1
+  in_req_R : in bool 1
+  in_req_U : in bool 1
+  in_req_B : in bool 1
+  in_req_C : in bool 1
+  out_ack_L : out bool 1
+  out_ack_R : out bool 1
+  out_ack_U : out bool 1
+  out_ack_B : out bool 1
+  out_ack_C : out bool 1
+)
+parameters = (
+  router_id : int 15
+)
+verilog_source_files = (
+  CWR_HDL_WORK;/RAID2/COURSE/mlchip/mlchip007/FP/router.v
+)
+hdl_language_type = VERILOG

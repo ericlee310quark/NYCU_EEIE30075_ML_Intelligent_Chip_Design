@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.synopsys.vp.base:NodeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.synopsys.vp.base="com.synopsys.vp.base.anlycfg" name="HARDWARE" kind="MODULE">
+<children href="./href_5.anlyconfig#/" name="i_Clock" kind="MODULE"/>
+<children href="./href_6.anlyconfig#/" name="i_Controller" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_10" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_11" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_12" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_13" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_14" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_15" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_2" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_3" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_4" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_5" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_6" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_7" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_8" kind="MODULE"/>
+<children href="./href_7.anlyconfig#/" name="i_Core_9" kind="MODULE"/>
+<children href="./href_8.anlyconfig#/" name="i_ROM" kind="MODULE"/>
+<children href="./href_9.anlyconfig#/" name="i_Reset" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_1" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_2" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_3" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_1" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_10" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_11" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_12" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_3" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_4" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_5" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_6" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_7" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_8" kind="MODULE"/>
+<children href="./href_10.anlyconfig#/" name="i_router_4_9" kind="MODULE"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace (Clock)" category="General"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+</com.synopsys.vp.base:NodeInfo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.synopsys.vp.base:NodeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.synopsys.vp.base="com.synopsys.vp.base.anlycfg" name="cwrCosimSysCScheduler" kind="MODULE">
+<children href="./href_3.anlyconfig#/" name="Decoupler" kind="MODULE"/>
+<children name="@myself" kind="GENERATEDOBJ">
+<children name="runScheduler" kind="PROCESS">
+<configInfo kind="MiscTrace" factoryName="Process Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+</children>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+</children>
+<configSummary kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Decoupling Trace" category="General"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+</com.synopsys.vp.base:NodeInfo>

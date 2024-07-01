@@ -1,0 +1,66 @@
+[2024-06-20 00:08:14]/RAID2/COURSE/mlchip/mlchip007/FP/export/./simv.daidir/rmapats.so
+[2024-06-20 00:08:33]/RAID2/COURSE/mlchip/mlchip007/FP/export/Debug/sim.so
+[2024-06-20 00:08:14]/RAID2/COURSE/mlchip/mlchip007/FP/export/simv.daidir/_218394_archive_1.so
+[2024-06-20 00:08:14]/RAID2/COURSE/mlchip/mlchip007/FP/export/simv.daidir/_cuarc0.so
+[2024-06-20 00:08:14]/RAID2/COURSE/mlchip/mlchip007/FP/export/simv.daidir/_prev_archive_1.so
+[2019-12-17 03:23:46]/RAID2/COURSE/mlchip/mlchip007/FP/export/simv.daidir/libCwrVcs.so
+[2018-04-17 19:55:22]/RAID2/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/gnu/gcc-6.2.0-64/bin/../lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../lib64/libgcc_s.so.1
+[2019-12-17 03:14:31]/RAID2/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/gnu/gcc-6.2.0-64/bin/../lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../lib64/libstdc++.so.6
+[2022-05-19 00:18:11]/lib64/ld-linux-x86-64.so.2
+[2018-04-11 08:40:42]/lib64/libattr.so.1
+[2021-02-03 00:31:53]/lib64/libblkid.so.1
+[2015-11-20 13:04:52]/lib64/libbz2.so.1
+[2022-05-19 00:18:11]/lib64/libc.so.6
+[2020-04-01 11:08:33]/lib64/libcap.so.2
+[2020-09-30 23:54:54]/lib64/libdbus-1.so.3
+[2022-05-19 00:18:09]/lib64/libdl.so.2
+[2020-10-02 00:30:12]/lib64/libdw.so.1
+[2020-10-02 00:30:12]/lib64/libelf.so.1
+[2020-04-01 11:08:42]/lib64/libffi.so.6
+[2017-08-02 23:54:39]/lib64/libgcrypt.so.11
+[2021-06-10 00:12:02]/lib64/libgio-2.0.so.0
+[2021-06-10 00:12:02]/lib64/libglib-2.0.so.0
+[2021-06-10 00:12:02]/lib64/libgmodule-2.0.so.0
+[2021-06-10 00:12:02]/lib64/libgobject-2.0.so.0
+[2014-06-10 16:46:48]/lib64/libgpg-error.so.0
+[2020-10-01 00:55:11]/lib64/liblz4.so.1
+[2022-06-15 22:40:44]/lib64/liblzma.so.5
+[2022-05-19 00:18:11]/lib64/libm.so.6
+[2021-02-03 00:31:53]/lib64/libmount.so.1
+[2022-05-19 00:18:10]/lib64/libnsl.so.1
+[2022-05-19 00:18:10]/lib64/libnss_files.so.2
+[2022-05-19 00:18:09]/lib64/libnss_nis.so.2
+[2020-04-01 11:50:40]/lib64/libnuma.so.1
+[2017-08-02 11:08:00]/lib64/libpcre.so.1
+[2022-05-19 00:18:10]/lib64/libpthread.so.0
+[2022-05-19 00:18:11]/lib64/libresolv.so.2
+[2020-04-01 11:16:40]/lib64/libselinux.so.1
+[2022-09-01 22:58:12]/lib64/libsystemd.so.0
+[2021-02-03 00:31:53]/lib64/libuuid.so.1
+[2023-03-07 22:49:07]/lib64/libz.so.1
+[2019-12-17 03:38:19]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libSnpsVP.so
+[2019-12-17 03:39:22]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libSnpsVPExt.so
+[2018-03-22 17:49:41]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libdwarf.so
+[2018-03-22 17:48:40]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libelf.so.0
+[2018-07-27 23:28:49]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libomniDynamic4.so.1
+[2018-07-27 23:28:48]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libomniORB4.so.1
+[2018-07-27 23:28:48]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libomnithread.so.3
+[2018-02-28 00:34:03]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libtbb.so.2
+[2018-02-28 00:34:08]/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux/common/libso-gcc-6.2.0-64/libtbbmalloc.so.2
+[2022-06-01 11:19:45]/usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so
+[2022-06-01 11:31:54]/usr/cad/synopsys/vcs/2022.06/linux64/lib/libsimprofile.so
+[2022-06-01 11:18:09]/usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
+[2022-06-01 11:29:19]/usr/cad/synopsys/vcs/2022.06/linux64/lib/libuclinative.so
+[2022-06-01 11:32:05]/usr/cad/synopsys/vcs/2022.06/linux64/lib/libvcsnew.so
+[2022-06-01 11:30:39]/usr/cad/synopsys/vcs/2022.06/linux64/lib/libvcsucli.so
+[2022-06-01 11:19:25]/usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
+[2022-06-01 11:30:05]/usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so
+[2014-06-10 12:06:04]/usr/lib64/libdbus-glib-1.so.2
+[2022-05-19 00:18:10]/usr/lib64/librt.so.1
+[2022-09-01 22:58:12]/usr/lib64/libudev.so.1
+[2024-06-20 00:07:40]SystemHierarchy.xml
+[filter_tool_generated,.*artifact.*,.*snps_stub.*,.*InnoRuntime.*]__filter
+[1]__num_IPTs
+[280]__num_objects_added
+[1]__num_objects_removed
+[1]__num_register_entries

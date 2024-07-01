@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.synopsys.vp.base:ConfigModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.synopsys.vp.base="com.synopsys.vp.base.anlycfg">
+<designRoot name="Design Hierarchy" kind="MODULE">
+<children href="./href_0.anlyconfig#/" name="SCProfiler" kind="MODULE"/>
+<children href="./href_1.anlyconfig#/" name="SNPS_PAM" kind="MODULE"/>
+<children href="./href_2.anlyconfig#/" name="cwrCosimSysCScheduler" kind="MODULE"/>
+<children href="./href_4.anlyconfig#/" name="HARDWARE" kind="MODULE"/>
+<configSummary kind="MiscTrace" factoryName="Simulation Hotspots" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Profiling Events" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Processor Model Event" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Memory Consumption" category="Simulation Profiling"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Power Analysis" category="Power Analysis"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Decoupling Trace" category="General"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace (Clock)" category="General"/>
+</designRoot>
+</com.synopsys.vp.base:ConfigModel>

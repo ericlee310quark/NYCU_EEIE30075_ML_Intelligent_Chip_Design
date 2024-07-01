@@ -1,0 +1,8 @@
+HDL_SIM_HOME = /usr/cad/synopsys/vcs/2022.06
+HDL_SIM_PROGRAM = vcs
+HDL_LIB_MAP =
+USER_VHDL_COMPILE_OPTS = 
+
+CWR_HDL_SDI = cwr_hdl_sdi_lib
+USER_ELAB_OPTS = 
+USER_RUNTIME_OPTS = 

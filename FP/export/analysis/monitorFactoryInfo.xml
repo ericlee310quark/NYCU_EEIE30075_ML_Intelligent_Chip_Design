@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.synopsys.vp.base.anlycfg:DocumentRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.synopsys.vp.base="com.synopsys.vp.base.anlycfg" xmlns:com.synopsys.vp.base.anlycfg="com.synopsys.vp.base.anlycfg.monitorfactory">
+  <monitorFactories>
+    <factoryInfo name="Code Coverage" description="This analysis tracks which lines in the source code have been covered during execution. This analysis depends on file/line debug information being loaded.">
+      <tag>Software Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+    </factoryInfo>
+    <factoryInfo name="Code And Branch Coverage" description="This analysis tracks which lines in the source code have been covered during execution. This analysis depends on file/line debug information being loaded.">
+      <tag>Software Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+    </factoryInfo>
+    <factoryInfo name="Linux 2.6.x" description="Linux 2.6.x">
+      <tag>cwr_os_monitor</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <attrInfo name="Compressed Image Offset" type="UINT64" description="The physical address, as seen by the core, at which the (uncompressed) kernel image is loaded.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="UINT64" value="65536"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Functional Coverage Port Monitor" description="">
+      <tag>vis=f0e6e0e7fcfeccf2fdf2ffeae0fae0d3a1a3a3aabda2</tag>
+    </factoryInfo>
+    <factoryInfo name="TLM Port Trace" description="This is factory for ports trace monitor">
+      <tag>vis=e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3</tag>
+      <dataItemKind name="sc_stream"/>
+      <attrInfo name="Specify ranges" type="LIST" description="Specify a list of begin and end addresses for ranges of transactions to be traced.&#xA;If no range is specified then all transactions will be traced.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+          <listItem xsi:type="com.synopsys.vp.base:VariantPairType" type="PAIR">
+            <first xsi:type="com.synopsys.vp.base:VariantValueType" type="UINT64" value="0"/>
+            <second xsi:type="com.synopsys.vp.base:VariantValueType" type="UINT64" value="18446744073709551615"/>
+          </listItem>
+        </defaultValue>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Transaction Field Statistics" description="Record one field of scv transactions in coware database and calculate statistics based on specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Transaction</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_field_statistics"/>
+      <attrInfo name="Analyzed Field" kind="2" type="STRING" description="Select the field for processing">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Condition Field" kind="2" type="STRING" description="Select the field to be used as ID">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+        <choices></choices>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Transaction Contention Statistics" description="Record number of overlapping transactions to the database and calculate statistics based on specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Transaction</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_contention_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Transaction Contention Statistics Recursive" description="Record number of overlapping transactions to the database and calculate statistics based on specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Record recursively with/Transaction</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_contention_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Transaction Count" description="Record number transactions in specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Transaction</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_count_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Transaction Count Recursive" description="Record number transactions in specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Record recursively with/Transaction</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_count_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Transaction Latency Statistics" description="Record transaction latency statistics">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Transaction</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_latency_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Transaction Latency Statistics Recursive" description="Record transaction latency statistics">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Record recursively with/Transaction</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_latency_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="BusDebug" description="Bus Debug">
+      <tag>Meta Monitor</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_bus_trans_trace"/>
+    </factoryInfo>
+    <factoryInfo name="BusAnalysis" description="Bus Analysis">
+      <tag>vis=fbe4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_bus_path_stats"/>
+      <dataItemKind name="cwr_bus_resource_stats"/>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000000"/>
+      </attrInfo>
+      <attrInfo name="Constraint File" type="STRING" description="Specify the name of a file that contains constraint rules">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Record target perspective" type="BOOL" description="Record extra information so a target centric view can be shown">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Record thread specific analysis" type="BOOL" description="Record extra information so analysis results can be shown in a thread specific way">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Record transaction attribute specific analysis" type="BOOL" description="Record extra information so analysis results can be sliced by AXI Burst Size, AXI Transaction Length">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Record end to end propagation delay" type="BOOL" description="Record forward and backward delay beteween initiator and target">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Include connected busses" kind="2" type="BOOL" description="Extend the bus to include busses connected to the target">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="MemAnalysis" description="Memory Analysis">
+      <tag>vis=fbe4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_mem_path_stats"/>
+      <dataItemKind name="cwr_mem_resource_stats"/>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000000"/>
+      </attrInfo>
+      <attrInfo name="Constraint File" type="STRING" description="Specify the name of a file that contains constraint rules">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Record target perspective" type="BOOL" description="Record extra information so a target centric view can be shown">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Record thread specific analysis" type="BOOL" description="Record extra information so analysis results can be shown in a thread specific way">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Record transaction attribute specific analysis" type="BOOL" description="Record extra information so analysis results can be sliced by AXI Burst Size, AXI Transaction Length">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Record end to end propagation delay" type="BOOL" description="Record forward and backward delay beteween initiator and target">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Include connected busses" kind="2" type="BOOL" description="Extend the bus to include busses connected to the target">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Value Trace" description="coware trace monitor">
+      <tag>vis=e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3</tag>
+      <dataItemKind name="sc_trace"/>
+    </factoryInfo>
+    <factoryInfo name="Value Trace (Clock)" description="coware trace monitor for clocks">
+      <tag>vis=e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3</tag>
+      <dataItemKind name="sc_trace"/>
+    </factoryInfo>
+    <factoryInfo name="IMC Trace" description="coware imc trace monitor">
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="sc_stream"/>
+    </factoryInfo>
+    <factoryInfo name="Process Trace" description="coware process trace monitor">
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="sc_stream"/>
+    </factoryInfo>
+    <factoryInfo name="SCV Field Statistics" description="Record one field of scv transactions in coware database and calculate statistics based on specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=SCV</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_field_statistics"/>
+      <attrInfo name="Analyzed Field" kind="2" type="STRING" description="Select the field for processing">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Condition Field" kind="2" type="STRING" description="Select the field to be used as ID">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+        <choices></choices>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="SCV Contention Statistics" description="Record number of overlapping transactions to the database and calculate statistics based on specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=SCV</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_contention_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="SCV Contention Statistics Recursive" description="Record number of overlapping transactions to the database and calculate statistics based on specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Record recursively with/SCV</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_contention_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="SCV Transaction Count" description="Record number transactions in specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=SCV</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_count_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="SCV Transaction Count Recursive" description="Record number transactions in specified interval">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Record recursively with/SCV</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_count_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="SCV Latency Statistics" description="Record transaction latency statistics">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=SCV</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_latency_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="SCV Latency Statistics Recursive" description="Record transaction latency statistics">
+      <tag>CONFIGURE_ACTION=ScvMonitorConfigurator</tag>
+      <tag>MenuPath=Record recursively with/SCV</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_latency_statistics"/>
+      <attrInfo name="Generator" type="STRING" description="Specify the field to use as id">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="SCV Monitor Configurator" description="Create SCV Configuration monitors">
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <attrInfo name="Interval" type="INT32" description="Specify interval for statistics calculation">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="1000"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Core Register Trace" description="Core Register Trace">
+      <tag>Software Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_core_register_trace"/>
+      <attrInfo name="Specify registers" type="LIST" description="Enter the names of the specific registers to be traced.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+        </defaultValue>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Register Trace" description="Register Trace">
+      <tag>vis=e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3</tag>
+      <dataItemKind name="cwr_register_trace"/>
+      <attrInfo name="Specify ranges" type="LIST" description="Specify the begin and end offsets of a list of ranges of the memory to be traced.&#xA;These values are offsets, not addresses, so for example, an offset of 1024 means address 4096 when the memory width is 4.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+          <listItem xsi:type="com.synopsys.vp.base:VariantPairType" type="PAIR">
+            <first xsi:type="com.synopsys.vp.base:VariantValueType" type="UINT64" value="0"/>
+            <second xsi:type="com.synopsys.vp.base:VariantValueType" type="UINT64" value="1023"/>
+          </listItem>
+        </defaultValue>
+      </attrInfo>
+      <attrInfo name="Specify registers" type="LIST" description="Select the names of the specific registers to be traced.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+        </defaultValue>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Register Trace Recursive" description="Register Trace">
+      <tag>MenuPath=Record recursively with/</tag>
+      <tag>vis=e7fffee3fce1e7cce7e1f2f0fafdf4d3a7bda3</tag>
+      <dataItemKind name="cwr_register_trace"/>
+      <attrInfo name="Specify ranges" type="LIST" description="Specify the begin and end offsets of a list of ranges of the memory to be traced.&#xA;These values are offsets, not addresses, so for example, an offset of 1024 means address 4096 when the memory width is 4.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+          <listItem xsi:type="com.synopsys.vp.base:VariantPairType" type="PAIR">
+            <first xsi:type="com.synopsys.vp.base:VariantValueType" type="UINT64" value="0"/>
+            <second xsi:type="com.synopsys.vp.base:VariantValueType" type="UINT64" value="1023"/>
+          </listItem>
+        </defaultValue>
+      </attrInfo>
+      <attrInfo name="Specify registers" type="LIST" description="Select the names of the specific registers to be traced.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+        </defaultValue>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Function Trace" description="Record all function calls. This requires symbol information to be loaded in order to give meaningful results.">
+      <tag>Software Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_stack_trace"/>
+      <attrInfo name="Context" type="STRING" description="Focus your analysis on a particular context (process, task, ...).&#xA;E.g.: &quot;/foo/993&quot; focuses analysis on one particular instance of the &quot;foo&quot; context, whereas &quot;/foo&quot; focuses on all instances of this context.&#xA;Leave empty to enable this analysis for all contexts.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Stack Reset Functions" type="LIST" description="Enter the names of the functions for which the function trace monitor will reset the stack(on calling this function)">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+        </defaultValue>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Counter profiling" description="Counter Profiling Analysis">
+      <tag>Software Analysis</tag>
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_counter"/>
+      <attrInfo name="Context" type="STRING" description="Focus your analysis on a particular context (process, task, ...).&#xA;E.g.: &quot;/foo/993&quot; focuses analysis on one particular instance of the &quot;foo&quot; context, whereas &quot;/foo&quot; focuses on all instances of this context.&#xA;Leave empty to enable this analysis for all contexts.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Instruction Level Functions" type="LIST" description="Enter the names of the functions for which profiling should happen on an instruction-level">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+        </defaultValue>
+      </attrInfo>
+      <attrInfo name="Sample At Interval Boundaries" type="BOOL" description="Sample the counters at interval boundaries, instead of basic block boundaries">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Memory Access" description="Memory Access Tracing Analysis">
+      <tag>Software Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_memory_access"/>
+      <attrInfo name="Context" type="STRING" description="Focus your analysis on a particular context (process, task, ...).&#xA;E.g.: &quot;/foo/993&quot; focuses analysis on one particular instance of the &quot;foo&quot; context, whereas &quot;/foo&quot; focuses on all instances of this context.&#xA;Leave empty to enable this analysis for all contexts.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record memory access trace" kind="2" type="BOOL" description="Record memory access trace">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Terminal Trace" description="Traces all text messages which become available on the terminal.&#xA;This is typically used to visualize the messages being printed by the kernel logger.">
+      <tag>Software Analysis</tag>
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_terminal_trace"/>
+    </factoryInfo>
+    <factoryInfo name="Instruction Trace" description="Trace all instructions executed by the core.">
+      <tag>Software Analysis</tag>
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_execution_history"/>
+      <attrInfo name="Context" type="STRING" description="Focus your analysis on a particular context (process, task, ...).&#xA;E.g.: &quot;/foo/993&quot; focuses analysis on one particular instance of the &quot;foo&quot; context, whereas &quot;/foo&quot; focuses on all instances of this context.&#xA;Leave empty to enable this analysis for all contexts.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Record time of individual instructions" type="BOOL" description="By default, the time when each basic block starts executing is recorded&#xA;as well as the total duration of the basic block. This is usually sufficient&#xA;for understanding the execution of your software and debugging problems.&#xA;&#xA;By choosing 'Yes', the exact time at which each individual instruction&#xA;gets executed is recorded. This gives you higher precision, at the expense&#xA;of slower simulation speed.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Context Trace" description="Records all context changes">
+      <tag>Software Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_context_trace"/>
+    </factoryInfo>
+    <factoryInfo name="Cache Trace" description="Records all cache changes">
+      <tag>Software Analysis</tag>
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_cache"/>
+      <attrInfo name="Context" type="STRING" description="Focus your analysis on a particular context (process, task, ...).&#xA;E.g.: &quot;/foo/993&quot; focuses analysis on one particular instance of the &quot;foo&quot; context, whereas &quot;/foo&quot; focuses on all instances of this context.&#xA;Leave empty to enable this analysis for all contexts.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Enum Trace" description="Records all enum changes">
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_enum_trace"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Int Trace" description="Records all int changes">
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Double Trace" description="Records all double changes">
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="String Trace" description="Records all string changes">
+      <tag>Debug</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_string_trace"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Variable Trace" description="Records all global variable accesses">
+      <tag>Software Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_variable_trace"/>
+      <attrInfo name="Context" type="STRING" description="Focus your analysis on a particular context (process, task, ...).&#xA;E.g.: &quot;/foo/993&quot; focuses analysis on one particular instance of the &quot;foo&quot; context, whereas &quot;/foo&quot; focuses on all instances of this context.&#xA;Leave empty to enable this analysis for all contexts.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Variables to Trace" type="LIST" description="Specify what to trace: variables, symbols, addresses, etc.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+          <listItem xsi:type="com.synopsys.vp.base:VariantPairType" type="PAIR">
+            <first xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+            <second xsi:type="com.synopsys.vp.base:VariantListType" type="LIST">
+            </second>
+          </listItem>
+        </defaultValue>
+      </attrInfo>
+      <attrInfo name="Group" kind="2" type="STRING" description="Specify the group this monitor belongs to, all variable trace monitors in the same group will record the data in a shared result">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="$DESIGNOBJECTNAME"/>
+      </attrInfo>
+      <attrInfo name="Trace Reads" type="BOOL" description="Trace read accesses, writes are always traced">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+      <attrInfo name="Report back in time event" type="BOOL" description="Trace back in time events. This is when a variable is read/written at an earlier time compared to the previous access, this can happen due to the cores running in separate quantums. This might indicate a possible race condition in the embedded software">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Check symbol filename" type="BOOL" description="Only enable tracing of a variable if the filename for the symbol is part of the active symbol table set">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Status Trace" description="Traces the statuses of a status object">
+      <tag>VP Hardware Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="sc_stream"/>
+    </factoryInfo>
+    <factoryInfo name="Status Trace Recursive" description="Traces the statuses of a status object">
+      <tag>MenuPath=Record recursively with/</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="sc_stream"/>
+    </factoryInfo>
+    <factoryInfo name="Logging" description="Traces logging messages from an object">
+      <tag>VP Hardware Analysis</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_diagnostics_trace"/>
+      <attrInfo name="Send to analysis database" kind="16" type="BOOL" description="Record logging messages to analysis database.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Send to simulation output" kind="16" type="BOOL" description="Send logging messages to simulation output.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="FastTrack Info" description="Trace FastTrack Info events">
+      <tag>category=FastTrack Logging</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_string_trace_FastTrack Info"/>
+      <attrInfo name="Record to database" kind="16" type="BOOL" description="Record data to database">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Send to stdout" kind="16" type="BOOL" description="Send info messages to stdout">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="FastTrack Warnings" description="Trace FastTrack Warnings events">
+      <tag>category=FastTrack Logging</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_string_trace_FastTrack Warnings"/>
+      <attrInfo name="Record to database" kind="16" type="BOOL" description="Record data to database">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Send to stdout" kind="16" type="BOOL" description="Send warning messages to stdout">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="FastTrack Errors" description="Trace FastTrack Errors events">
+      <tag>category=FastTrack Logging</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_string_trace_FastTrack Errors"/>
+      <attrInfo name="Record to database" kind="16" type="BOOL" description="Record data to database">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Send to stdout" kind="16" type="BOOL" description="Send error messages to stdout">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="FastTrack Model Internal" description="Trace FastTrack Model Internal events">
+      <tag>category=FastTrack Logging</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_string_trace_FastTrack Model Internal"/>
+      <attrInfo name="Log level (0->6)" kind="16" type="INT32" description="Sets the desired model internal logging level (6 being most verbose)">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="INT32" value="0"/>
+        <choices>0</choices>
+        <choices>1</choices>
+        <choices>2</choices>
+        <choices>3</choices>
+        <choices>4</choices>
+        <choices>5</choices>
+        <choices>6</choices>
+      </attrInfo>
+      <attrInfo name="Record to database" kind="16" type="BOOL" description="Record data to database">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Send to stdout" kind="16" type="BOOL" description="Send model internal messages to stdout">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Decoupling Trace" description="Trace Decoupling Trace events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_enum_trace_Decoupling Trace"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Total Power" description="Trace Total Power events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace_Total Power"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Energy Events" description="Trace Energy Events events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace_Energy Events"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Power State" description="Trace Power State events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_enum_trace_Power State"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Leakage Power" description="Trace Leakage Power events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace_Leakage Power"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Dynamic Power" description="Trace Dynamic Power events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace_Dynamic Power"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Voltage" description="Trace Voltage events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace_Voltage"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Frequency" description="Trace Frequency events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_data_trace_Frequency"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Power Analysis" description="">
+      <tag>ChildMonitor</tag>
+      <tag>category=Power Analysis</tag>
+      <tag>vis=e5faf6e4ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <attrInfo name="Domain Name" type="STRING" description="Name of the Domain to which Monitor belongs">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value=""/>
+      </attrInfo>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expenseof increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Specifies if Trace to be recorded. If false is specified then only Stats will be recorded">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="UPF Model" type="BOOL" description="Specifies if Power model is UPF Model or PAM Model">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="0"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Simulation Hotspots" description="Trace Simulation Hotspots events">
+      <tag>Debug</tag>
+      <tag>category=Simulation Profiling</tag>
+      <tag>vis=fafde0e7e1ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_data_trace_Simulation Hotspots"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Profiling Events" description="Trace Profiling Events events">
+      <tag>Debug</tag>
+      <tag>category=Simulation Profiling</tag>
+      <tag>vis=fafde0e7e1ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_data_trace_Profiling Events"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Processor Model Event" description="Trace Processor Model Event events">
+      <tag>Debug</tag>
+      <tag>category=Simulation Profiling</tag>
+      <tag>vis=fafde0e7e1ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_data_trace_Processor Model Event"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Memory Consumption" description="Trace Memory Consumption events">
+      <tag>Debug</tag>
+      <tag>category=Simulation Profiling</tag>
+      <tag>vis=fafde0e7e1ccf2fdf2ffeae0fae0d3a7bda3</tag>
+      <dataItemKind name="cwr_data_trace_Memory Consumption"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="ClockParameter" description="Trace ClockParameter events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_enum_trace_ClockParameter"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="ClockTrigger" description="Trace ClockTrigger events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_enum_trace_ClockTrigger"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+    <factoryInfo name="Timer" description="Trace Timer events">
+      <tag>Debug</tag>
+      <tag>VP Hardware Analysis</tag>
+      <tag>category=General</tag>
+      <tag>vis=e0e4ccf2fdf2ffeae0fae0d3a1a3a3a4bda2</tag>
+      <dataItemKind name="cwr_enum_trace_Timer"/>
+      <attrInfo name="Aggregation interval" type="STRING" description="Defines the time period over which to aggregate the accesses.&#xA;Smaller values give you higher definition, at the expense of increased memory consumption.">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="STRING" value="1 ms"/>
+      </attrInfo>
+      <attrInfo name="Record Trace" type="BOOL" description="Enable or disable collection of trace data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+      <attrInfo name="Record Stats" type="BOOL" description="Enable or disable collection of statistics data">
+        <defaultValue xsi:type="com.synopsys.vp.base:VariantValueType" type="BOOL" value="1"/>
+      </attrInfo>
+    </factoryInfo>
+  </monitorFactories>
+</com.synopsys.vp.base.anlycfg:DocumentRoot>

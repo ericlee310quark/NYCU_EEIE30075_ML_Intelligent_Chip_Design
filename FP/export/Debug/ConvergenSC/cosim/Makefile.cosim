@@ -1,0 +1,55 @@
+include Debug/ConvergenSC/cosim/Makefile.include
+include ${COWAREHOME}/common/etc/hdlcosim/scripts/Makefile.vcs
+
+CWR_HDL_LIB = cwr_hdl_work
+CWR_HDL_TOP = cwr_cosim_top
+CWR_HDL_TOP_DSYNC = cwr_cosim_top_deltasync
+
+
+ifdef CWR_INFERIOR_TTY
+CWR_INFERIOR_IO_REDIRECT=> ${CWR_INFERIOR_TTY} 2>&1
+else
+CWR_INFERIOR_IO_REDIRECT=
+endif
+
+.SILENT:
+
+build : simv
+
+build_dsync : simv_deltasync
+
+simv : /RAID2/COURSE/mlchip/mlchip007/FP/router.v Debug/ConvergenSC/cosim/cwr_cosim_shell.v Debug/ConvergenSC/cosim/cwr_cosim_top.v
+	${VCS_C} ${CWR_HDL_LIB} ${VCS_C_OPTS} +incdir+${COWAREHOME}/common/etc/hdlcosim/vcs /RAID2/COURSE/mlchip/mlchip007/FP/router.v Debug/ConvergenSC/cosim/cwr_cosim_shell.v Debug/ConvergenSC/cosim/cwr_cosim_top.v -o simv
+
+simv_deltasync : /RAID2/COURSE/mlchip/mlchip007/FP/router.v Debug/ConvergenSC/cosim/cwr_cosim_shell_deltasync.v Debug/ConvergenSC/cosim/cwr_cosim_top_deltasync.v
+	${VCS_C} ${CWR_HDL_LIB} ${VCS_C_OPTS} +incdir+${COWAREHOME}/common/etc/hdlcosim/vcs /RAID2/COURSE/mlchip/mlchip007/FP/router.v Debug/ConvergenSC/cosim/cwr_cosim_shell_deltasync.v Debug/ConvergenSC/cosim/cwr_cosim_top_deltasync.v -o simv_deltasync
+
+runbatch : FORCE
+	${VCS_R_BATCH} ${CWR_HDL_LIB} ${VCS_R_BATCH_OPTS} ${CWR_HDL_TOP} ${CWR_INFERIOR_IO_REDIRECT}
+
+runbatch_dsync : FORCE
+	${VCS_R_BATCH} ${CWR_HDL_LIB} ${VCS_R_BATCH_OPTS_DSYNC} ${CWR_HDL_TOP_DSYNC} ${CWR_INFERIOR_IO_REDIRECT}
+
+runpreelab : FORCE
+	${VCS_R_PREELAB} ${CWR_HDL_LIB} ${VCS_R_PREELAB_OPTS} ${CWR_HDL_TOP}
+
+runpreelab_dsync : FORCE
+	${VCS_R_PREELAB} ${CWR_HDL_LIB} ${VCS_R_PREELAB_OPTS_DSYNC} ${CWR_HDL_TOP_DSYNC}
+
+rungui : FORCE
+	${VCS_R_GUI} ${CWR_HDL_LIB} ${VCS_R_GUI_OPTS} ${CWR_HDL_TOP} ${CWR_INFERIOR_IO_REDIRECT}
+
+rungui_dsync : FORCE
+	${VCS_R_GUI} ${CWR_HDL_LIB} ${VCS_R_GUI_OPTS_DSYNC} ${CWR_HDL_TOP_DSYNC} ${CWR_INFERIOR_IO_REDIRECT}
+
+rundve : FORCE
+	${VCS_R_GUI} ${CWR_HDL_LIB} ${VCS_R_DVE_OPTS} ${CWR_HDL_TOP} ${CWR_INFERIOR_IO_REDIRECT}
+
+rundve_dsync : FORCE
+	${VCS_R_GUI} ${CWR_HDL_LIB} ${VCS_R_DVE_OPTS_DSYNC} ${CWR_HDL_TOP_DSYNC} ${CWR_INFERIOR_IO_REDIRECT}
+
+cwr_hdl_sdi_lib : FORCE
+	${VCS_SDI_LIB_GEN} ${VCS_SDI_LIB_GEN_OPTS} 
+
+FORCE:
+

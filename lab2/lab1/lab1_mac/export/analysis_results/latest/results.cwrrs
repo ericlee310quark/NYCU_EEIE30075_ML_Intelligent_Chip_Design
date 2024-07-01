@@ -1,0 +1,2 @@
+# Items are separated by comma; One line for each data item.
+#<monitor name>,<monitor type>,<object name>,<visible>,<data item name>,<data item kind>,<resource>,<resource ID),<viewer>,<viewer args>,<signature>

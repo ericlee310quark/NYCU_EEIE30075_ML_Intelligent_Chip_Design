@@ -1,0 +1,3 @@
+<simulation-configurations active-configuration="Default">
+   <simulation-configuration name="Default" properties-file="Properties.xml"/>
+</simulation-configurations>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.synopsys.vp.base:NodeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.synopsys.vp.base="com.synopsys.vp.base.anlycfg" name="i_ROM" kind="MODULE">
+<children name="@myself" kind="GENERATEDOBJ">
+<children name="port_0" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="port_1" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="port_2" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="port_3" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="port_4" kind="PORT_IN">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="port_5" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="port_6" kind="PORT_OUT">
+<configInfo kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+</children>
+<children name="run" kind="PROCESS">
+<configInfo kind="MiscTrace" factoryName="Process Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+</children>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+</children>
+<configInfo kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configInfo kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="Value Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="Process Trace" category="General"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Info" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Warnings" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Errors" category="FastTrack Logging"  configurable="true"/>
+<configSummary kind="MiscTrace" factoryName="FastTrack Model Internal" category="FastTrack Logging"  configurable="true"/>
+</com.synopsys.vp.base:NodeInfo>

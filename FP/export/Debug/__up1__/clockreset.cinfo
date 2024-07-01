@@ -1,0 +1,12 @@
+SOURCE=../clockreset.cpp
+COWAREHOME=/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux
+PPFLAGS = -I"."
+CXXFLAGS = -fPIC
+CXX=gcc-6.2.0-64
+OPT_LEVEL= +O1
+SCSIM_OPTS=
+CXXFLAGS= $(CWR_SYSTEMC_CXXFLAGS) -g2   
+
+
+SCCFLAGS=
+

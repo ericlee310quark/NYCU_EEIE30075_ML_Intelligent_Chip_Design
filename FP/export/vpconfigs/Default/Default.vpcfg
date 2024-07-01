@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.synopsys.vp.base.vpcfg.core:Configuration description="" evaledParamFile="" readOnly="true" simArgs="--cwr_wait" simDir="" simExe="" unevaledParamFilePCT="" unevaledParamFileVDKC="" vdksys="" vpScript="" xmi:version="2.0" xmlns:com.synopsys.vp.base.vpcfg.core="com.synopsys.vp.base.vpcfg.core.model" xmlns:xmi="http://www.omg.org/XMI">
+   <debugInfo traceSimOutput="true"/>
+</com.synopsys.vp.base.vpcfg.core:Configuration>

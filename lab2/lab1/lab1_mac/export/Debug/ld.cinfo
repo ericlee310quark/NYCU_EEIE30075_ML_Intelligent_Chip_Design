@@ -1,0 +1,7 @@
+COWAREHOME=/usr/cad/synopsys/pa_virtualizer/O-2018.09-SP2-4/SLS/linux
+LDFLAGS = 
+PUREFLAGS = 
+CXX=gcc-6.2.0-64
+
+
+
